@@ -47,21 +47,40 @@ const dontDoThis = ((n1 + n2 + n3 + n4) == 50) &&
 
 // PART 1:
 // Check if all numbers are divisible by 5. Cache the result in a variable.
+let nums = [n1, n2, n3, n4];
+let divisibleBy5 = [];
+for (let i=0; i < nums.length; i++) {
+    if nums[i] % 5 == 0;
+        divisibleBy5 += nums[i];
+    break;
+};
+console.log(divisibleBy5);
+
 
 // Check if the first number is larger than the last. Cache the result in a variable.
-
+let firstNumLargeThanLastNum = [];
+if nums[0] > nums[nums.length-1];
+    firstNumLargeThanLastNum += nums[0];
+    break;
+console.log(firstNumLargeThanLastNum);
 
 // Accomplish the following arithmetic chain:
   // Subtract the first number from the second number.
-
+let subtractRes = nums[0] - nums[1];
 
   // Multiply the result by the third number.
-
+let mutiplyRes = subtractRes * nums[2];
 
   // Find the remainder of dividing the result by the fourth number.
+let remainder = mutiplyRes/nums[3];
 
 // Change the way that isOver25 calculates so that we do not need to use the NOT operator (!) in other logic comparisons. Rename the variable as appropriate.
 
+for(let i=0; i<nums.length-1; i++) {
+    if nums[i] > 25;
+        isOver25 += nums[i];
+    break;
+};
 
 // PART 2:
 
