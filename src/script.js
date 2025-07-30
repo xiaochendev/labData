@@ -118,7 +118,9 @@ let totalGallonsIn23 = totalDistance/fuelEfficiency["23"];
 let isEnoughBudget = budget > totalGallonsIn30 * avgCost || budget > totalGallonsIn28 * avgCost || budget > totalGallonsIn23 * avgCost;
 
 // How long will the trip take, in hours?
-
+let totalHoursIn55 = totalDistance/fuelEfficiency["55"];
+let totalHoursIn60 = totalDistance/fuelEfficiency["60"];
+let totalHoursIn75 = totalDistance/fuelEfficiency["75"];
 
 // Compare the results when traveling at an average of 55, 60, and 75 miles per hour. Which makes the most sense for the trip?
 
