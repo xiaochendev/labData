@@ -86,17 +86,42 @@ for(let i=0; i<nums.length-1; i++) {
 
 // You are planning a cross-country road trip!
 // The distance of the trip, in total, is 1,500 miles.
+let totalDistance = 1500;
+
 // Your car’s fuel efficiency is as follows:
+let fuelEfficiency = {};
+
 // At 55 miles per hour, you get 30 miles per gallon.
+fuelEfficiency.distance = 55;
+fuelEfficiency.rate = 30;
+
 // At 60 miles per hour, you get 28 miles per gallon.
+fuelEfficiency.distance = 60;
+fuelEfficiency.rate = 28;
+
 // At 75 miles per hour, you get 23 miles per gallon.
+fuelEfficiency.distance = 75;
+fuelEfficiency.rate = 23;
+
 // You have a fuel budget of $175.
+const budget = 175;
+
 // The average cost of fuel is $3 per gallon.
+const avgCost = 3;
 // Set up a program to answer the following questions:
 // How many gallons of fuel will you need for the entire trip?
+let totalGallonsIn30 = totalDistance/fuelEfficiency["30"];
+let totalGallonsIn28 = totalDistance/fuelEfficiency["28"];
+let totalGallonsIn23 = totalDistance/fuelEfficiency["23"];
+
 // Will your budget be enough to cover the fuel expense?
+let isEnoughBudget = budget > totalGallonsIn30 * avgCost || budget > totalGallonsIn28 * avgCost || budget > totalGallonsIn23 * avgCost;
+
 // How long will the trip take, in hours?
+
+
 // Compare the results when traveling at an average of 55, 60, and 75 miles per hour. Which makes the most sense for the trip?
+
 // Log the results of your calculations using string concatenation or template literals.
 
 
