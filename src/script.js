@@ -47,40 +47,60 @@ const dontDoThis = ((n1 + n2 + n3 + n4) == 50) &&
 
 // PART 1:
 // Check if all numbers are divisible by 5. Cache the result in a variable.
-let nums = [n1, n2, n3, n4];
-let divisibleBy5 = [];
-for (let i=0; i < nums.length; i++) {
-    if nums[i] % 5 == 0;
-        divisibleBy5 += nums[i];
-    break;
-};
-console.log(divisibleBy5);
 
+// let nums = [n1, n2, n3, n4];
+// let divisibleBy5 = [];
+// for (let i=0; i < nums.length; i++) {
+//     if nums[i] % 5 = 0;
+//         divisibleBy5 += nums[i];
+// };
+// console.log(divisibleBy5);
+
+const isDiv5 = n1 % 5 + n2 % 5 + n3 % 5 + n4 % 5 == 0;
+console.log(`${isDiv5}: is divisible by 5`);
 
 // Check if the first number is larger than the last. Cache the result in a variable.
-let firstNumLargeThanLastNum = [];
-if nums[0] > nums[nums.length-1];
-    firstNumLargeThanLastNum += nums[0];
-    break;
-console.log(firstNumLargeThanLastNum);
+
+// let firstNumLargeThanLastNum = [];
+// if nums[0] > nums[nums.length-1];
+//     firstNumLargeThanLastNum += nums[0];
+//     break;
+// console.log(firstNumLargeThanLastNum);
+
+const firstNumLgLast = n1 > n4;
+console.log(`${firstNumLgLast}: first number is larger than last.`);
 
 // Accomplish the following arithmetic chain:
   // Subtract the first number from the second number.
-let subtractRes = nums[0] - nums[1];
+
+// let subtractRes = nums[0] - nums[1];
+let num = n2 - n1;
+console.log(`${n2} - ${n1} = ${num}`);
 
   // Multiply the result by the third number.
-let mutiplyRes = subtractRes * nums[2];
+
+// let mutiplyRes = subtractRes * nums[2];
+num *= n3;
+console.log(`${n2 - n1} * ${n3} = ${num}`);
+
 
   // Find the remainder of dividing the result by the fourth number.
-let remainder = mutiplyRes/nums[3];
+
+// let remainder = mutiplyRes % nums[3];
+num %= n4;
+console.log(`${n2 - n1} * ${n3} % ${n4} = ${num}`);
 
 // Change the way that isOver25 calculates so that we do not need to use the NOT operator (!) in other logic comparisons. Rename the variable as appropriate.
 
-for(let i=0; i<nums.length-1; i++) {
-    if nums[i] > 25;
-        isOver25 += nums[i];
-    break;
-};
+// for(let i=0; i<nums.length-1; i++) {
+//     if nums[i] <= 25;
+//         isUnder25 += nums[i];
+//     break;
+// };
+
+const isUnder25 = n1 <= 25 && n2 <= 25 && n3 <= 25 && n4 <= 25;
+console.log(`it is ${isUnder25}, the numbers are all under 25`)
+
 
 // PART 2:
 
