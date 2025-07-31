@@ -1,9 +1,9 @@
 # Simple Data manipulation
 
 
-# Steps:
+# Steps
 
-Copy repository to your local:
+Copy repository to your local
 
 ```
 git clone https://github.com/xiaochendev/labData.git
@@ -14,5 +14,5 @@ Check results by running .js file
 node script.js
 ```
 
-# Technology:
+# Technology
 - Javascript
