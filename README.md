@@ -1,7 +1,7 @@
 # Simple Data manipulation
 
 
-# steps:
+# Steps:
 
 Copy repository to your local:
 
@@ -14,5 +14,5 @@ Check results by running .js file
 node script.js
 ```
 
-# technology:
+# Technology:
 - Javascript
