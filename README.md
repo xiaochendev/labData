@@ -1,5 +1,5 @@
 # Data
-- simple_manipulation lab 308.01
+- data_manipulation lab 308.01
 - control_flow lab 308.02 
 
 
