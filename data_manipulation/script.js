@@ -106,43 +106,50 @@ console.log(`it is ${isUnder25}, the numbers are all under 25`)
 
 // You are planning a cross-country road trip!
 // The distance of the trip, in total, is 1,500 miles.
-let totalDistance = 1500;
-
-// Your car’s fuel efficiency is as follows:
-let fuelEfficiency = {};
-
-// At 55 miles per hour, you get 30 miles per gallon.
-fuelEfficiency.distance = 55;
-fuelEfficiency.rate = 30;
-
-// At 60 miles per hour, you get 28 miles per gallon.
-fuelEfficiency.distance = 60;
-fuelEfficiency.rate = 28;
-
-// At 75 miles per hour, you get 23 miles per gallon.
-fuelEfficiency.distance = 75;
-fuelEfficiency.rate = 23;
-
+const totalDistance = 1500;
 // You have a fuel budget of $175.
 const budget = 175;
-
 // The average cost of fuel is $3 per gallon.
-const avgCost = 3;
+const costPerGallon = 3;
+
+// Your car’s fuel efficiency is as follows:
+// let fuelEff = {60:28, 75:23, 55:30}
+
+// At 60 miles per hour, you get 28 miles per gallon.
+// At 75 miles per hour, you get 23 miles per gallon.
+// At 55 miles per hour, you get 30 miles per gallon.
+let speed = 75;
+let mpg = 23;
+
+
 // Set up a program to answer the following questions:
 // How many gallons of fuel will you need for the entire trip?
-let totalGallonsIn30 = totalDistance/fuelEfficiency["30"];
-let totalGallonsIn28 = totalDistance/fuelEfficiency["28"];
-let totalGallonsIn23 = totalDistance/fuelEfficiency["23"];
+let gallonsPerTrip = totalDistance/mpg;
+console.log(
+  `At ${speed}mph, you will need ${gallonsPerTrip} gallons of fuel, to travel ${totalDistance} miles.`
+);
 
 // Will your budget be enough to cover the fuel expense?
-let isEnoughBudget = budget > totalGallonsIn30 * avgCost || budget > totalGallonsIn28 * avgCost || budget > totalGallonsIn23 * avgCost;
+let costPerTrip = gallonsPerTrip * costPerGallon;
+console.log(
+  `At ${speed}mph, it takes total ${gallonsPerTrip} gallons, which cost $${costPerTrip} dollars`
+);
+
+let isEnoughBudget = budget >= costPerTrip;
+console.log(
+  `With budget $${budget}. it is ${isEnoughBudget} that we can effort this trip at that speed.`
+);
 
 // How long will the trip take, in hours?
-let totalHoursIn55 = totalDistance/fuelEfficiency["55"];
-let totalHoursIn60 = totalDistance/fuelEfficiency["60"];
-let totalHoursIn75 = totalDistance/fuelEfficiency["75"];
-
+let timeOfTrip = totalDistance / speed;
+console.log(
+  `At ${speed}mph it would take ${timeOfTrip} hrs to complete ${totalDistance} miles`
+);
 // Compare the results when traveling at an average of 55, 60, and 75 miles per hour. Which makes the most sense for the trip?
+// At 75mph, it takes total 65.21739130434783 gallons, which cost $195.6521739130435 dollars, it would take 20 hrs.
+// At 60mph, it takes total 53.57142857142857 gallons, which cost $160.71428571428572 dollars. At 60mph it would take 25 hrs to complete 1500 miles
+// At 55mph, it takes total 50 gallons, which cost $150 dollars. it would take 27.272727272727273 hrs.
+// Travel at 55 - 60 mph makes sense.
 
 // Log the results of your calculations using string concatenation or template literals.
 
