@@ -2,14 +2,53 @@
 // To begin, solve the following classic “Fizz Buzz” problem. There are a few different ways to do this - experiment with what you think is the most efficient. Once you have solved the problem, ask yourself if there could be another way; and if so, would it be better.
 // Accomplish the following:
     // Loop through all numbers from 1 to 100.
+    for (let i=1; i<=100; i++) {
+        console.log(`print all numbers from 1 to 11: ${i}`);
+    }
+
+console.log(`------------------`)
     // If a number is divisible by 3, log “Fizz.”
-    // If a number is divisible by 5, log “Buzz.”
+    let num = 100;
+    while(num > 0) {
+        if(num % 3 == 0) {
+            console.log(`Fizz`);
+        }
+        num--;
+    };
+console.log(`------------------`)
+    // If a number is divisible by 5, log “Buzz.
+    let num1 = 100;
+    while(num1 > 0) {
+        if(num1 % 5 == 0) {
+            console.log(`Buzz`);
+        }
+        num1--;
+    };
+
+console.log(`------------------`)
     // If a number is divisible by both 3 and 5, log “Fizz Buzz.”
+    let num2 = 100;
+    while(num2 > 0){
+        if(num2 % 3 == 0 && num2 % 5 == 0) { 
+            console.log(`Fizz Buzz`);
+        }
+        num2--;
+    };
+
+console.log(`------------------`)
     // If a number is not divisible by either 3 or 5, log the number.
+    let num3 = 100;
+    while(num3 > 0) {
+        if(num3 % 3 == 0 || num3 % 5 == 0) { 
+            console.log(`Fizz Buzz`);
+        }
+        num3--;
+    };
+
 // Remember to commit your solution once it is working.
 
-
-// Part 2: Prime Time (No Rush)
+console.log(`------------------`)
+// Part 2: Prime Time ((No Rush))
 // Now we will move onto something slightly more complex.
 // Context: A prime number is any whole number greater than 1 that cannot be exactly divided by any whole number other than itself and 1. For example, the number 5 is prime because it cannot be divided by 4, 3, or 2; it can only be divided by itself (5) and 1. Similarly, the numbers 7 and 11 are prime. As numbers become larger, determining whether or not they are prime is increasingly difficult, but loops make this process relatively easy!
 // Write a script that accomplishes the following:
