@@ -1,10 +1,10 @@
 # Data
-- data_manipulation	_lab 308.01_
-- control_flow		_lab 308.02_ 
-- practical_loops 	_lab 308.03_
+- data_manipulation -- ***lab 308.01***
+- control_flow -- ***lab 308.02*** 
+- practical_loops -- ***lab 308.03***
 
-### script.js -used optmized dynamic ways to solve problems, ex. function
-### simpleVersion.js -used basic ways to solve problems, beginner friendly
+#### script.js - used optmized dynamic ways to solve problems, ex. function
+#### simpleVersion.js - used basic ways to solve problems, beginner friendly
 
 # Steps
 
