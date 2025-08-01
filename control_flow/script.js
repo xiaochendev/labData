@@ -11,7 +11,7 @@
 const RADIUS = 5;   
 const PI = 3.1415;
 const GARDEN_AREA = PI * RADIUS * RADIUS;
-const AREA_PER_PLANT = 0.8;
+const SCALE_PER_PLANT = 0.8;
 
 let nums_of_plants = 20;
 
@@ -26,14 +26,14 @@ let nums_of_plants = 20;
 
         function current_capacity(weeks) {
             let current_capacity = 0;
-            return current_capacity = AREA_PER_PLANT * nums_of_plants * BASE ** weeks;
+            return current_capacity = SCALE_PER_PLANT * nums_of_plants * BASE ** weeks;
         };
 
         function prune(current_capacity) {
             if (current_capacity < max_capacity) {
-                console.log(`Kept pruning. Current capacity is ${current_capacity} Not yet reach limit`)
+                return `Kept pruning. Current capacity is ${current_capacity} Not yet reach limit`;
             } else {
-                console.log(`Stop Pruned, Reached 80% capacity: ${current_capacity}`);
+                return `Stop Pruned, Reached 80% capacity: ${current_capacity} plants`;
             };
         };
 
@@ -54,16 +54,28 @@ let nums_of_plants = 20;
         // This condition should be met if the plant count after the given number of weeks is less than 50% of the maximum capacity of the garden.
         function plant(res_from_monitor) {
             if (res_from_monitor == 'Less than 50%, something wrong') {
-                console.log(`Stop planted`);
+                return `Stop planting, no extra room.`;
             } else {
-                console.log(`Kept planting, extra room provided`);
+                return `Kept planting, extra room provided.`;
             };
         };
 
 // Within your submission, include the results for 1, 2, and 3 weeks of growth as inputs.
-console.log(`current capacity for 1 week is ${current_capacity(1)}, Prune status: ${prune(current_capacity)}, monitor status: ${monitor(current_capacity)}, Plant status: ${plant(monitor(current_capacity))}`);
-console.log(`current capacity for 2 weeks is ${current_capacity(2)}, Prune status: ${prune(current_capacity)}, monitor status: ${monitor(current_capacity)}, Plant status: ${plant(monitor(current_capacity))}`);
-console.log(`current capacity for 3 weeks is ${current_capacity(3)}, Prune status: ${prune(current_capacity)}, monitor status: ${monitor(current_capacity)}, Plant status: ${plant(monitor(current_capacity))}`);
+console.log(`
+    Current capacity for 1 week is ${current_capacity(1)} plants, 
+    Prune status: ${prune(current_capacity(1))}, 
+    Monitor status: ${monitor(current_capacity(1))}, 
+    Plant status: ${plant(monitor(current_capacity(1)))}`);
+console.log(`
+    Current capacity for 2 weeks is ${current_capacity(2)} plants, 
+    Prune status: ${prune(current_capacity(2))}, 
+    Monitor status: ${monitor(current_capacity(2))}, 
+    Plant status: ${plant(monitor(current_capacity(2)))}`);
+console.log(`
+    Current capacity for 3 weeks is ${current_capacity(3)} plants, 
+    Prune status: ${prune(current_capacity(3))}, 
+    Monitor status: ${monitor(current_capacity(3))}, 
+    Plant status: ${plant(monitor(current_capacity(3)))}`);
 
 
 // Part 2: Thinking Bigger
