@@ -3,7 +3,8 @@
 // For the first part of this assignment, revisit your code from ALAB 308.3.1, wherein you create a script that parsed CSVs. Now that you have knowledge of arrays and objects, how would you change your approach to this problem? Take a few minutes to examine and refactor the code before continuing.
 // For reference, ALAB 308.3.1 is embedded below. The section on CSV parsing is “Part 3.”
 
-console.log(`----------------- Old Code`);
+console.log(`
+----------------- Old Code`);
 /*
 let csvStr = `ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,Blaine,Quiz Master,58\n98,Bill,Doctor's Assistant,26`;
 
@@ -54,28 +55,11 @@ ID Name Occupation Age
 42 Bruce Knight 41
 57 Bob Fry Cook 19
 63 Blaine Quiz Master 58`);
-console.log(`------------------ End of old code.`);
 
+console.log(`
+------ Part 1: Refactoring: created 2 functions: csvToGridArray and gridToStrTablePrint`);
 
-console.log(`------ Refactoring start:`);
-
-// Time complexity: O(n)
-function csvToGrid (csvData) {
-    const rows = csvData.split('\n');
-    let gridData = [];
-    for (const row of rows) {
-        let cells = row.split(',');
-        gridData.push(cells);
-    }
-    return gridData;
-}
-
-console.log(`Result of csvToGrid, output is object:`);
-
-const data = 'ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,Blaine,Quiz Master,58\n98,Bill,Doctor’s Assistant,26';
-console.log(csvToGrid(data));
-// console.log(typeof(csvToGrid(data)));
-
+const data = "ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,Blaine,Quiz Master,58\n98,Bill,Doctor’s Assistant,26";
 
 // grid is 2-D arrays or an array of objects.
 // Time complexity: O(n**2)
@@ -84,7 +68,7 @@ function gridToStrTablePrint(grid) {
     for (let i = 0; i<grid.length-1; i++) {
         for (let j = 0; j < grid[i].length; j++){
             gridInString += grid[i][j];
-            if( j < grid[i].length - 1) { // Add spaces between elements
+            if( j < grid[i].length - 1) { // Add spaces between elements in row
                 gridInString += " ";
             }
         }
@@ -95,12 +79,14 @@ function gridToStrTablePrint(grid) {
     return gridInString;
 }
 
-console.log(`Result of gridToStrTablePrint, output is string:`);
+console.log(`Output from refactored code:`);
 
-console.log(gridToStrTablePrint(csvToGrid(data)));
-// console.log(typeof(gridToStrTablePrint(csvToGrid(data))));
+console.log(gridToStrTablePrint(csvToGridArray(data)));
+// console.log(typeof(gridToStrTablePrint(csvToGridArray(data))));
 
 
+console.log(`
+------ Part 2 Expanding Functionality: csvToGridArray`);
 
 // Part 2: Expanding Functionality
 // Now that you are familiar with your code, and perhaps have improved it, it is time to expand upon its functionality.
@@ -123,6 +109,25 @@ console.log(gridToStrTablePrint(csvToGrid(data)));
     //  ["98", "Bill", "Doctor’s Assistant", "26"]]
 
 
+// Time complexity: O(n)
+function csvToGridArray (csvData) {
+    const rows = csvData.split('\n');
+    let gridArray = [];
+    for (const row of rows) {
+        let cells = row.split(',');
+        gridArray.push(cells);
+    }
+    return gridArray;
+}
+
+console.log(`Result of csvToGridArray:`);
+
+console.log(csvToGridArray(data));
+// console.log(typeof(csvToGrid(data)));
+
+
+console.log(`
+------ Part 3 Transforming Data: gridArrayToJsonStr`);
 
 // Part 3: Transforming Data
 // While the data is now much more workable than it was in its string format, there is still a large amount of obscurity in the data itself. When we access an arbitrary index of the results array, it is impossible to know what that data is referring to without additional cross-referencing.
@@ -145,6 +150,32 @@ console.log(gridToStrTablePrint(csvToGrid(data)));
     //  { id: "98", name: "Bill", occupation: "Doctor’s Assistant", age: "26" }]
 // Important: While this functionality can be built into the original CSV parser you built in Part 2, we are intentionally creating two different algorithms to test different skillsets. Please leave these sections separate even if it would be more efficient to combine them.
 
+function gridArrayToJsonObj (gridArray) {
+    let headers = gridArray[0];
+    let rows = gridArray.slice(1);
+    // console.log(headers);
+    // console.log(rows);
+    // console.log(typeof(rows));
+
+    return rows.map((row) => {
+            const dict = {};
+            headers.forEach((header, index) => {
+                dict[header] = row[index];
+            });
+            return dict;
+        });
+}
+
+console.log(gridArrayToJsonObj(csvToGridArray(data)));
+
+// const jsonStr = JSON.stringify(gridArrayToJsonObj(csvToGridArray(data)));
+// console.log(jsonStr);
+
+
+
+console.log(`
+------ Part 4 Sorting and Manipulating Data, remove, insert, add`);
+
 // Part 4: Sorting and Manipulating Data
 // It is important to know how to work with data in this format, an array of objects, as it is one of the most commonly used data formats in JavaScript.
 // Using array methods, accomplish the following tasks, in order upon the result of Part 3:
@@ -160,6 +191,14 @@ console.log(gridToStrTablePrint(csvToGrid(data)));
     //  { id: "63", name: "Blaine", occupation: "Quiz Master", age: "58" },
     //  { id: "7", name: "Bilbo", occupation: "None", age: "111" }]
 // Finally, use the values of each object within the array and the array’s length property to calculate the average age of the group. This calculation should be accomplished using a loop.
+
+
+
+
+
+
+console.log(`
+------ Part 5 Full Circle: jsonToCsv`);
 
 // Part 5: Full Circle
 // As a final task, transform the final set of data back into CSV format.
