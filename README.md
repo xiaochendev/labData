@@ -1,8 +1,8 @@
 # Data
-- data_manipulation -- ***lab 308.01***
-- control_flow -- ***lab 308.02*** 
-- practical_loops -- ***lab 308.03***
-- data_collection  -- __lab 308.04__
+- data_manipulation -- __lab 308.01__
+- control_flow -- __lab 308.02__
+- practical_loops -- __lab 308.03__
+- data_collection -- __lab 308.04__
 
 #### script.js - used optmized dynamic ways to solve problems, ex. function, parameter, dict
 #### simpleVersion.js - used basic ways to solve problems, beginner friendly
