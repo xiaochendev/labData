@@ -57,9 +57,7 @@ ID Name Occupation Age
 console.log(`------------------ End of old code.`);
 
 
-
 console.log(`------ Refactoring start:`);
-
 
 // Time complexity: O(n)
 function csvToGrid (csvData) {
@@ -77,7 +75,6 @@ console.log(`Result of csvToGrid, output is object:`);
 const data = 'ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,Blaine,Quiz Master,58\n98,Bill,Doctor’s Assistant,26';
 console.log(csvToGrid(data));
 // console.log(typeof(csvToGrid(data)));
-
 
 
 // grid is 2-D arrays or an array of objects.
@@ -104,6 +101,7 @@ console.log(gridToStrTablePrint(csvToGrid(data)));
 // console.log(typeof(gridToStrTablePrint(csvToGrid(data))));
 
 
+
 // Part 2: Expanding Functionality
 // Now that you are familiar with your code, and perhaps have improved it, it is time to expand upon its functionality.
 // Begin with the following task:
@@ -123,6 +121,7 @@ console.log(gridToStrTablePrint(csvToGrid(data)));
     //  ["57", "Bob", "Fry Cook", "19"],
     //  ["63", "Blaine", "Quiz Master", "58"],
     //  ["98", "Bill", "Doctor’s Assistant", "26"]]
+
 
 
 // Part 3: Transforming Data
@@ -161,7 +160,6 @@ console.log(gridToStrTablePrint(csvToGrid(data)));
     //  { id: "63", name: "Blaine", occupation: "Quiz Master", age: "58" },
     //  { id: "7", name: "Bilbo", occupation: "None", age: "111" }]
 // Finally, use the values of each object within the array and the array’s length property to calculate the average age of the group. This calculation should be accomplished using a loop.
-
 
 // Part 5: Full Circle
 // As a final task, transform the final set of data back into CSV format.
