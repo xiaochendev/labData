@@ -3,6 +3,104 @@
 // For the first part of this assignment, revisit your code from ALAB 308.3.1, wherein you create a script that parsed CSVs. Now that you have knowledge of arrays and objects, how would you change your approach to this problem? Take a few minutes to examine and refactor the code before continuing.
 // For reference, ALAB 308.3.1 is embedded below. The section on CSV parsing is “Part 3.”
 
+console.log(`----------------- Old Code`);
+/*
+let csvStr = `ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,Blaine,Quiz Master,58\n98,Bill,Doctor's Assistant,26`;
+
+//  Variables
+let cell1 = "";
+let cell2 = "";
+let cell3 = "";
+let cell4 = "";
+let commas = 0; // Counter variable
+
+// Loop through string, for loop to have access to the index
+for (let i = 0; i < csvStr.length; i++) {
+  if (csvStr[i] == ",") {
+    // If comma
+    commas++; // Add to comma counter
+  } else if (csvStr[i] == "\n") {
+    // If new line
+    console.log(cell1, cell2, cell3, cell4); // print new line
+
+    // Clear previous data for new row
+    commas = 0;
+    cell1 = "";
+    cell2 = "";
+    cell3 = "";
+    cell4 = "";
+  } else {
+    // for all chars
+    if (commas == 0) {
+      // put in the appropriate cell, based on commas
+      cell1 += csvStr[i];
+    } else if (commas == 1) {
+      cell2 += csvStr[i];
+    } else if (commas == 2) {
+      cell3 += csvStr[i];
+    } else {
+      cell4 += csvStr[i];
+    }
+  }
+
+  // If last char in string print final cells
+  if (csvStr.length - 1 == i) {
+    console.log(cell1, cell2, cell3, cell4);
+  }
+}
+*/
+console.log(`Output from old code:
+ID Name Occupation Age
+42 Bruce Knight 41
+57 Bob Fry Cook 19
+63 Blaine Quiz Master 58`);
+console.log(`------------------ End of old code.`);
+
+
+console.log(`------ Refactoring start:`);
+
+// Time complexity: O(n)
+function csvToGrid (csvData) {
+    const rows = csvData.split('\n');
+    let gridData = [];
+    for (const row of rows) {
+        let cells = row.split(',');
+        gridData.push(cells);
+    }
+    return gridData;
+}
+
+console.log(`Result of csvToGrid, output is object:`);
+
+const data = 'ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,Blaine,Quiz Master,58\n98,Bill,Doctor’s Assistant,26';
+console.log(csvToGrid(data));
+// console.log(typeof(csvToGrid(data)));
+
+
+// grid is 2-D arrays or an array of objects.
+// Time complexity: O(n**2)
+function gridToStrTablePrint(grid) {
+    let gridInString = "";
+    for (let i = 0; i<grid.length-1; i++) {
+        for (let j = 0; j < grid[i].length; j++){
+            gridInString += grid[i][j];
+            if( j < grid[i].length - 1) { // Add spaces between elements
+                gridInString += " ";
+            }
+        }
+        if (i < grid.length-1) { // Add newline between rows
+        gridInString += "\n";
+        }
+    }
+    return gridInString;
+}
+
+console.log(`Result of gridToStrTablePrint, output is string:`);
+
+console.log(gridToStrTablePrint(csvToGrid(data)));
+// console.log(typeof(gridToStrTablePrint(csvToGrid(data))));
+
+
 
 // Part 2: Expanding Functionality
 // Now that you are familiar with your code, and perhaps have improved it, it is time to expand upon its functionality.
@@ -23,6 +121,7 @@
     //  ["57", "Bob", "Fry Cook", "19"],
     //  ["63", "Blaine", "Quiz Master", "58"],
     //  ["98", "Bill", "Doctor’s Assistant", "26"]]
+
 
 
 // Part 3: Transforming Data
@@ -61,7 +160,6 @@
     //  { id: "63", name: "Blaine", occupation: "Quiz Master", age: "58" },
     //  { id: "7", name: "Bilbo", occupation: "None", age: "111" }]
 // Finally, use the values of each object within the array and the array’s length property to calculate the average age of the group. This calculation should be accomplished using a loop.
-
 
 // Part 5: Full Circle
 // As a final task, transform the final set of data back into CSV format.
