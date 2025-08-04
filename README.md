@@ -3,7 +3,7 @@
 - control_flow -- ***lab 308.02*** 
 - practical_loops -- ***lab 308.03***
 
-#### script.js - used optmized dynamic ways to solve problems, ex. function
+#### script.js - used optmized dynamic ways to solve problems, ex. function, parameter, dict
 #### simpleVersion.js - used basic ways to solve problems, beginner friendly
 
 # Steps
