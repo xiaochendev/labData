@@ -45,106 +45,164 @@ const dontDoThis = ((n1 + n2 + n3 + n4) == 50) &&
   (n1 != n2 && n1 != n3 && n1 != n4 && n2 != n3 && n2 != n4 && n3 != n4);
 
 
+console.log(`------------ PART 1:`);
 // PART 1:
 // Check if all numbers are divisible by 5. Cache the result in a variable.
+// const isDiv5 = n1 % 5 + n2 % 5 + n3 % 5 + n4 % 5 == 0;
+// console.log(`${isDiv5}: is divisible by 5`);
 
-// let nums = [n1, n2, n3, n4];
-// let divisibleBy5 = [];
-// for (let i=0; i < nums.length; i++) {
-//     if nums[i] % 5 = 0;
-//         divisibleBy5 += nums[i];
-// };
-// console.log(divisibleBy5);
+function divBy5 (nums) {
+  let res = [];
+  for (let i=0; i<nums.length; i++) {
+    if (nums[i] % 5 == 0){
+      res.push(nums[i]);    
+    }
+  }
+  return res;
+}
 
-const isDiv5 = n1 % 5 + n2 % 5 + n3 % 5 + n4 % 5 == 0;
-console.log(`${isDiv5}: is divisible by 5`);
+const nums = [n1, n2, n3, n4];
+
+console.log(`Numbers is divisible by 5 are:`)
+console.log(divBy5(nums));
+
+
+console.log(`First Number Greater Than Last Number:`)
 
 // Check if the first number is larger than the last. Cache the result in a variable.
+// const firstNumLgLast = n1 > n4;
+// console.log(`${firstNumLgLast}: first number is larger than last.`);
 
-// let firstNumLargeThanLastNum = [];
-// if nums[0] > nums[nums.length-1];
-//     firstNumLargeThanLastNum += nums[0];
-//     break;
-// console.log(firstNumLargeThanLastNum);
+  function firstNumGtLast (nums) {
+    let isFirstLargerThanLast = false;
+    if (nums[0] > nums[nums.length-1]) {
+      return isFirstLargerThanLast = true;
+    }
+    return isFirstLargerThanLast;
+  }
 
-const firstNumLgLast = n1 > n4;
-console.log(`${firstNumLgLast}: first number is larger than last.`);
+console.log(`--- Original case:`)
+console.log('It is ' + firstNumGtLast(nums) + `, First num: ${nums[0]}, Larger than last num: ${nums[nums.length - 1]}`);
 
+const testNums = [15, 20, 40, 50, 70]
+console.log(`--- SECOND TESTING CASE:`)
+console.log('It is ' + firstNumGtLast(testNums) + `, First num: ${testNums[0]}, Larger than last num: ${testNums[testNums.length - 1]}`);
+
+
+console.log(`FIND REMAINDER after arithmetic operations:`);
 // Accomplish the following arithmetic chain:
   // Subtract the first number from the second number.
-
-// let subtractRes = nums[0] - nums[1];
-let num = n2 - n1;
-console.log(`${n2} - ${n1} = ${num}`);
-
   // Multiply the result by the third number.
-
-// let mutiplyRes = subtractRes * nums[2];
-num *= n3;
-console.log(`${n2 - n1} * ${n3} = ${num}`);
-
-
   // Find the remainder of dividing the result by the fourth number.
 
-// let remainder = mutiplyRes % nums[3];
-num %= n4;
-console.log(`${n2 - n1} * ${n3} % ${n4} = ${num}`);
+  function findRemainder (nums) {
+    if (nums.length != 0) {
+        let res = 0;
+        res = nums[0] - nums[1];
+        res *= nums[2];
+        res %= nums[3];
+        return res;
+    } else {
+      return `No numbers, its empty!!`;
+    }
+  }
 
+console.log(`Finding remainder: ${ nums}`);
+console.log(findRemainder(nums));
+
+let testNums02 = [30, 2, 3, 5, 70];
+console.log(`Finding remainder: ${testNums02}`);
+console.log(findRemainder(testNums02));
+
+let testNumsEmpty = [];
+console.log(`Finding remainder: ${testNumsEmpty}`);
+console.log(findRemainder(testNumsEmpty));
+
+
+console.log(`-----------------------`)
 // Change the way that isOver25 calculates so that we do not need to use the NOT operator (!) in other logic comparisons. Rename the variable as appropriate.
-
-// for(let i=0; i<nums.length-1; i++) {
-//     if nums[i] <= 25;
-//         isUnder25 += nums[i];
-//     break;
-// };
-
 const isUnder25 = n1 <= 25 && n2 <= 25 && n3 <= 25 && n4 <= 25;
 console.log(`it is ${isUnder25}, the numbers are all under 25`)
 
 
+console.log(`------------PART 2:`)
 // PART 2:
-
 // You are planning a cross-country road trip!
-// The distance of the trip, in total, is 1,500 miles.
-const totalDistance = 1500;
-// You have a fuel budget of $175.
-const budget = 175;
-// The average cost of fuel is $3 per gallon.
-const costPerGallon = 3;
-
+  // The distance of the trip, in total, is 1,500 miles.
+  // You have a fuel budget of $175.
+  // The average cost of fuel is $3 per gallon.
 // Your car’s fuel efficiency is as follows:
-// let fuelEff = {60:28, 75:23, 55:30}
+  // At 60 miles per hour, you get 28 miles per gallon.
+  // At 75 miles per hour, you get 23 miles per gallon.
+  // At 55 miles per hour, you get 30 miles per gallon.
 
-// At 60 miles per hour, you get 28 miles per gallon.
-// At 75 miles per hour, you get 23 miles per gallon.
-// At 55 miles per hour, you get 30 miles per gallon.
-let speed = 75;
-let mpg = 23;
+const totalDistance = 1500;
+const budget = 175;
+const costPerGallon = 3;
+const fuelEff = {
+  60: 28, 
+  75: 23, 
+  55: 30
+};
 
-
+console.log(`------ Gallons of Fuel:`);
 // Set up a program to answer the following questions:
 // How many gallons of fuel will you need for the entire trip?
-let gallonsPerTrip = totalDistance/mpg;
-console.log(
-  `At ${speed}mph, you will need ${gallonsPerTrip} gallons of fuel, to travel ${totalDistance} miles.`
-);
+const copyGallonsPerTrip = {};
+
+  Object.keys(fuelEff).forEach((speed) => {
+    // console.log(`speed: ${speed}, value: ${fuelEff[speed]}, index: ${index}`);
+    let mpg = fuelEff[speed];
+    let gallonsPerTrip = totalDistance/mpg;
+    console.log(`At ${speed}mph, you will need ${gallonsPerTrip} gallons of fuel, to travel ${totalDistance} miles.`); 
+
+    fuelEff[speed] = gallonsPerTrip;
+
+    // saved gallonsPerTrip for further uses by merging dictionary
+    // const copyFuelEff = {...fuelEff, gallonsPerTrip};
+    Object.assign(copyGallonsPerTrip, fuelEff, gallonsPerTrip);
+  });
+
+console.log(`------`);
+console.log(`-- New dic {speed : gallonsPerTrip}`);
+console.log(copyGallonsPerTrip);
+
+console.log(`------ Total Cost`);
 
 // Will your budget be enough to cover the fuel expense?
-let costPerTrip = gallonsPerTrip * costPerGallon;
-console.log(
-  `At ${speed}mph, it takes total ${gallonsPerTrip} gallons, which cost $${costPerTrip} dollars`
-);
+const copyCostPerTrip = {};
+  Object.keys(copyGallonsPerTrip).forEach((speed)=>{
+    let costPerTrip = copyGallonsPerTrip[speed] * costPerGallon;
+    console.log(
+      `At ${speed}mph, it takes total ${copyGallonsPerTrip[speed]} gallons, which cost $${costPerTrip} dollars`
+    );
+    copyGallonsPerTrip[speed] = costPerTrip;
+    Object.assign(copyCostPerTrip, copyGallonsPerTrip, costPerTrip);
+  });
 
-let isEnoughBudget = budget >= costPerTrip;
-console.log(
-  `With budget $${budget}. it is ${isEnoughBudget} that we can effort this trip at that speed.`
-);
+console.log(`------`);
+console.log(`-- New dic {speed : costPerTrip}`);
+console.log(copyCostPerTrip);
+
+console.log(`------ Is it enough budget?`);
+
+  Object.keys(copyCostPerTrip).forEach((speed)=>{
+    let isEnoughBudget = budget >= copyCostPerTrip[speed];
+    console.log(
+      `With budget $${budget}. it is ${isEnoughBudget} that we can effort this trip at ${speed}mph. total cost $${copyCostPerTrip[speed]}`
+    );
+  });
+
+
+console.log(`------ How long will the trip take?`);
 
 // How long will the trip take, in hours?
-let timeOfTrip = totalDistance / speed;
-console.log(
-  `At ${speed}mph it would take ${timeOfTrip} hrs to complete ${totalDistance} miles`
-);
+
+  Object.keys(fuelEff).forEach((speed) => {
+    let timeOfTrip = totalDistance / speed;
+    console.log(`At ${speed}mph it would take ${timeOfTrip} hrs to complete ${totalDistance} miles`); 
+  });
+
 // Compare the results when traveling at an average of 55, 60, and 75 miles per hour. Which makes the most sense for the trip?
 // At 75mph, it takes total 65.21739130434783 gallons, which cost $195.6521739130435 dollars, it would take 20 hrs.
 // At 60mph, it takes total 53.57142857142857 gallons, which cost $160.71428571428572 dollars. At 60mph it would take 25 hrs to complete 1500 miles
