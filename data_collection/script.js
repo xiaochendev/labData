@@ -192,7 +192,26 @@ console.log(`
     //  { id: "7", name: "Bilbo", occupation: "None", age: "111" }]
 // Finally, use the values of each object within the array and the array’s length property to calculate the average age of the group. This calculation should be accomplished using a loop.
 
+//JSON.parse(JSON.stringify(obj)) // make deep copy of obj or array
+let shallowCopyData = [...gridArrayToJsonObj(csvToGridArray(data))];
 
+console.log(`Make copy of data for furthur operations:`);
+console.log(shallowCopyData);
+
+shallowCopyData.pop();
+console.log(`1. After removed last element, current data is:`, shallowCopyData);
+
+
+const objToInsert= { id: "48", name: "Barry", occupation: "Runner", age: "25" };
+
+shallowCopyData.splice(1, 0, objToInsert);
+console.log(`2. Inserted new object at index 1, current data is:`, shallowCopyData);
+
+
+const objectToInsert = { id: "7", name: "Bilbo", occupation: "None", age: "111" };
+
+shallowCopyData.push(objectToInsert);
+console.log(`3. Add the object to the end of the array, current data is:`, shallowCopyData);
 
 
 
@@ -203,3 +222,42 @@ console.log(`
 // Part 5: Full Circle
 // As a final task, transform the final set of data back into CSV format.
 // There are a number of ways to do this; be creative!
+
+
+let jsonObj = gridArrayToJsonObj(csvToGridArray(data));
+
+let header = Object.keys(jsonObj[0]);
+// console.log(header);
+let row1 = Object.values(jsonObj[0]);
+let row2 = Object.values(jsonObj[1]);
+let row3 = Object.values(jsonObj[2]);
+let row4 = Object.values(jsonObj[3]);
+// console.log(row1);
+// console.log(row2);
+// console.log(row3);
+// console.log(row4);
+let gridArray = [];
+gridArray.push(header, row1, row2, row3, row4);
+
+console.log(`--- jsonObjToGridArray:`);
+console.log(gridArray);
+
+
+console.log(`--- gridArrayToCsv:`);
+
+let gridInString = "";
+gridArray.forEach((rowArray, rowIndex)=>{
+    rowArray.forEach((value, colIndex)=>{
+        // console.log(rowIndex, colIndex, value);
+        gridInString += value;
+        // console.log(gridInString);
+        if(colIndex < gridArray[rowIndex].length - 1){
+            gridInString += ",";
+        }
+    })
+    if(rowIndex < gridArray.length-1) {
+        gridInString += "\n";
+    }
+});
+
+console.log(gridInString);
