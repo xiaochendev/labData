@@ -103,3 +103,61 @@ const LearnerSubmissions = [
 // If an assignment is not yet due, do not include it in the results or the average.
 // if the learner’s submission is late (submitted_at is past due_at), 
     // deduct 10 percent of the total points possible from their score for that assignment
+
+
+function getLearnerData(course, ag, submissions) {
+  let result = [];
+  // console.log(course.id);
+  // console.log(ag.course_id);
+  // console.log(ag.assignments);
+  // console.log(ag.assignments.find(assignment => assignment.id == "1"));
+  // console.log(submissions.filter(submission => submission.learner_id == 125));
+  // const COURSE_ID = course.id;
+  // console.log(COURSE_ID );
+
+  // get user from db:
+  let learners = submissions.map(item => item.learner_id);
+  console.log(learners);
+
+  let today = "2025-03-05";
+
+  let isAssiged = isAssigedInCourse(course, ag);
+  // console.log(isAssiged);
+
+
+  // get assignment info:
+
+  // find out ass status:
+  let avg = avgAssignment(ag, submissions);
+
+  // check if AssignmentGroup.course_id is in CourseInfo.id
+
+
+  // if LearnerSubmissions.submission.submitted_at not due, not indclude it in the result or avg
+
+  // if LearnerSubmissions.submission.submitted_at is late, Penalty = -10%(AssignmentGroup.assignments.points_possible)
+
+
+  return result;
+}
+
+const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
+
+console.log(result);
+
+
+function isAssigedInCourse(course, ag){
+  try {
+      const isAssiged = Object.values(course).includes(ag.course_id);
+      return isAssiged;
+    // console.log(`Assigned Succefully in assignment group ${ag.name} for ${course.id} - ${course.name}.`);
+  } catch (error) {
+    // return error;
+    return "Error accessing assignment:" + error;
+  }
+}
+
+// //   "avg": total(LearnerSubmissions.find(submission.score) / total(AssignmentGroup.assignments.find(assignment.points_possible)),
+function avgAssignment(ag, submissions){
+
+}
