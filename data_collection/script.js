@@ -217,47 +217,26 @@ console.log(`3. Add the object to the end of the array, current data is:`, shall
 
 
 console.log(`
------- Part 5 Full Circle: jsonToCsv`);
+------ Part 5 Full Circle: jsonObjToCsv`);
 
 // Part 5: Full Circle
 // As a final task, transform the final set of data back into CSV format.
 // There are a number of ways to do this; be creative!
 
+function jsonObjToCsv(jsonObj) {
+    let header = Object.keys(jsonObj[0]);
+    // console.log(header);
+    let headerString = header.join(',') + '\n';
+    let csvString = headerString;
 
-let jsonObj = gridArrayToJsonObj(csvToGridArray(data));
-
-let header = Object.keys(jsonObj[0]);
-// console.log(header);
-let row1 = Object.values(jsonObj[0]);
-let row2 = Object.values(jsonObj[1]);
-let row3 = Object.values(jsonObj[2]);
-let row4 = Object.values(jsonObj[3]);
-// console.log(row1);
-// console.log(row2);
-// console.log(row3);
-// console.log(row4);
-let gridArray = [];
-gridArray.push(header, row1, row2, row3, row4);
-
-console.log(`--- jsonObjToGridArray:`);
-console.log(gridArray);
-
-
-console.log(`--- gridArrayToCsv:`);
-
-let gridInString = "";
-gridArray.forEach((rowArray, rowIndex)=>{
-    rowArray.forEach((value, colIndex)=>{
-        // console.log(rowIndex, colIndex, value);
-        gridInString += value;
-        // console.log(gridInString);
-        if(colIndex < gridArray[rowIndex].length - 1){
-            gridInString += ",";
-        }
-    })
-    if(rowIndex < gridArray.length-1) {
-        gridInString += "\n";
+    for (const item of jsonObj) {
+        const values = header.map(key => {
+            return item[key];
+            // console.log(item[key]);
+        })
+        csvString += values.join(',') + '\n';
     }
-});
+    return (csvString);
+}
 
-console.log(gridInString);
+console.log(jsonObjToCsv(gridArrayToJsonObj(csvToGridArray(data))));
