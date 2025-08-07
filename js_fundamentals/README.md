@@ -1,8 +1,8 @@
-# Javascript Fundamentals
+# Grade Report System
 - Generated a Grade Report System for every learners in the current courses, including:
-- Identified current existing learners,
-- Calculated the average of completed/late assigments for every learner,
-- Displayed the grade of each completed/late assignment.
+    - Identified current existing learners,
+    - Calculated the average of completed/late assigments for every learner,
+    - Displayed the grade of each completed/late assignment.
 
 ```
 // The desired result:
