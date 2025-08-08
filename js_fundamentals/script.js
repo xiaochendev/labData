@@ -106,58 +106,81 @@ const LearnerSubmissions = [
 
 
 function getLearnerData(course, ag, submissions) {
-  let result = [];
-  // console.log(course.id);
-  // console.log(ag.course_id);
-  // console.log(ag.assignments);
-  // console.log(ag.assignments.find(assignment => assignment.id == "1"));
-  // console.log(submissions.filter(submission => submission.learner_id == 125));
-  // const COURSE_ID = course.id;
-  // console.log(COURSE_ID );
+  // console.log(ag);
+  // console.log(submissions);
+  // console.log(course);
+  // // Observed assisngments r array inside of object
+  // // get assignment info: 
 
-  // get user from db:
-  let learners = submissions.map(item => item.learner_id);
-  console.log(learners);
-
-  let today = "2025-03-05";
-
-  let isAssiged = isAssigedInCourse(course, ag);
-  // console.log(isAssiged);
+  // Map assignments by ID for easier lookup
+  const assignmentsMap = ag.assignments.reduce((acc, assignment) => {
+    acc[assignment.id] = assignment;
+    return acc;
+  }, {});
+  // console.log(assignmentsMap); 
 
 
-  // get assignment info:
+  let results = [];
 
-  // find out ass status:
-  let avg = avgAssignment(ag, submissions);
+  // most needed info is in submissions <- center of most operations
+  // loop through submissions
 
-  // check if AssignmentGroup.course_id is in CourseInfo.id
+  submissions.forEach(submission => {
+
+    // Group learner submissions by learner_id
+    const { learner_id, assignment_id, submission:{score}} = submission;
+    const assignment = assignmentsMap[assignment_id];
+
+    // Find or create the learner's result obj
+    let result = results.find(result => result.id === learner_id);
+    if (!result) {
+      result = {
+        id: learner_id, 
+        avg: 0, ...Object.fromEntries(ag.assignments.map(a => [a.id, 0]))
+      };
+      results.push(result);
+    }
+
+    // calculate each assignment score (out of 1.0 scale)
+    const assignmentMaxPoints = assignment.points_possible;
+
+    // Penalty: 
+    // if LearnerSubmissions.submission.submitted_at not due, not indclude it in the result or avg
+    // if LearnerSubmissions.submission.submitted_at is late, Penalty = -10%(AssignmentGroup.assignments.points_possible)
+    let today = new Date();
+    let submissionDate = new Date(submission.submitted_at);
+    let assignmentDueDate = new Date(assignment.due_at);
+    let isLate = submissionDate > assignmentDueDate 
+    let penalty = isLate ? 0.10 : 0;
+    const scoreAfterLate = Math.max(0, score - (penalty*assignment.points_possible)); 
+    
+    // pevent divided by 0 by checking points_possible
+    const scaledScore = assignment.points_possible === 0? 0 : scoreAfterLate/assignmentMaxPoints;
+    
+    // round to 3 decimal
+    const roundedScore = parseFloat(scaledScore.toFixed(3));
+    // store each assignment score
+    result[assignment_id] = roundedScore;
+
+    // update avg
+    let totalScore = 0;
+    let totalPossiblePoints = 0;
+
+    results.forEach(result => {
+      if (result.id === learner_id) {
+        ag.assignments.forEach(a => {
+          totalScore += result[a.id] * a.points_possible;
+          totalPossiblePoints += a.points_possible;
+        });
+      }
+    });
+    result.avg = totalScore/totalPossiblePoints;
+  });
+  
+  return results;
+};
 
 
-  // if LearnerSubmissions.submission.submitted_at not due, not indclude it in the result or avg
+const results = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
 
-  // if LearnerSubmissions.submission.submitted_at is late, Penalty = -10%(AssignmentGroup.assignments.points_possible)
-
-
-  return result;
-}
-
-const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
-
-console.log(result);
-
-
-function isAssigedInCourse(course, ag){
-  try {
-      const isAssiged = Object.values(course).includes(ag.course_id);
-      return isAssiged;
-    // console.log(`Assigned Succefully in assignment group ${ag.name} for ${course.id} - ${course.name}.`);
-  } catch (error) {
-    // return error;
-    return "Error accessing assignment:" + error;
-  }
-}
-
-// //   "avg": total(LearnerSubmissions.find(submission.score) / total(AssignmentGroup.assignments.find(assignment.points_possible)),
-function avgAssignment(ag, submissions){
-
-}
+console.log(results);
