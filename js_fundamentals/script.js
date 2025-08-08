@@ -128,7 +128,10 @@ function getLearnerData(course, ag, submissions) {
   submissions.forEach(submission => {
 
     // Group learner submissions by learner_id
-    const { learner_id, assignment_id, submission:{score}} = submission;
+    const { 
+      learner_id, 
+      assignment_id, 
+      submission:{score}} = submission;
     const assignment = assignmentsMap[assignment_id];
 
     // Find or create the learner's result obj
@@ -152,10 +155,10 @@ function getLearnerData(course, ag, submissions) {
     let assignmentDueDate = new Date(assignment.due_at);
     let isLate = submissionDate > assignmentDueDate 
     let penalty = isLate ? 0.10 : 0;
-    const scoreAfterLate = Math.max(0, score - (penalty*assignment.points_possible)); 
+    const scoreAfterLate = Math.max(0, score - (penalty * assignmentMaxPoints)); 
     
     // pevent divided by 0 by checking points_possible
-    const scaledScore = assignment.points_possible === 0? 0 : scoreAfterLate/assignmentMaxPoints;
+    const scaledScore = assignmentMaxPoints === 0? 0 : scoreAfterLate/assignmentMaxPoints;
     
     // round to 3 decimal
     const roundedScore = parseFloat(scaledScore.toFixed(3));
@@ -169,12 +172,18 @@ function getLearnerData(course, ag, submissions) {
     results.forEach(result => {
       if (result.id === learner_id) {
         ag.assignments.forEach(a => {
-          totalScore += result[a.id] * a.points_possible;
-          totalPossiblePoints += a.points_possible;
+          let dueDate = new Date(a.due_at);
+         // dont count toward avg if assignment not due
+          if (dueDate <= today) {
+              totalScore += result[a.id] * a.points_possible;
+              totalPossiblePoints += a.points_possible;          
+          }
+        // calc the avg score       
+        result.avg = parseFloat((totalScore/totalPossiblePoints).toFixed(3));
         });
       }
     });
-    result.avg = totalScore/totalPossiblePoints;
+
   });
   
   return results;
