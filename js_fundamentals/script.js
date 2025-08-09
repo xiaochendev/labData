@@ -107,8 +107,6 @@ const LearnerSubmissions = [
       // if LearnerSubmissions.submission.submitted_at not due, not indclude it in the result or avg
       // if LearnerSubmissions.submission.submitted_at is late, Penalty = -10%(AssignmentGroup.assignments.points_possible)
 
-
-
 function getLearnerData(course, ag, submissions) {
   // console.log(ag); 
   // console.log(submissions); 
@@ -184,12 +182,14 @@ function getLearnerData(course, ag, submissions) {
       
       ag.assignments.forEach(a => {
         let dueDate = normalizeDate(a.due_at);
+
       // dont count toward avg if assignment not due
         if (dueDate <= today && result[a.id] !== 0) {
           let score = result[a.id]
           totalScore += score * a.points_possible;
           totalPossiblePoints += a.points_possible;          
         }});
+
       // calc the avg score, ensure non-zero-divisor       
       result.avg = totalPossiblePoints > 0 ? parseFloat((totalScore/totalPossiblePoints).toFixed(3)) : 0;
     };
@@ -208,7 +208,5 @@ function normalizeDate(date) {
   return d;
 }
 
-
 const results = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
-
 console.log(results);
