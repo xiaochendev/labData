@@ -42,13 +42,13 @@ node script.js
 # Reflection
 
 Q: What could you have done differently during the planning stages of your project to make the execution easier?
-- N/A 
+- archicture functions before writing details code; explore datatypes and relationships between different tables
 
 Q: Were there any requirements that were difficult to implement? What do you think would make them easier to implement in future projects?
-- N/A
+- printed out exact same order like desired result; cuz first loop saved assignment result using array.push(); then did the arithemetic operations, later added avg to result. Would use Map if ordered is critical for the application
 
 Q: What would you add to, or change about your application if given more time?
-- N/A
+- Divided it into multiples small functions; it's more practical when handle large dataset or databases
 
 Q: Use this space to make notes for your future self about anything that you think is important to remember about this process, or that may aid you when attempting something similar again:
-- N/A
+- 
