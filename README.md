@@ -7,6 +7,7 @@
 
 #### script.js - used optmized dynamic ways to solve problems, ex. function, parameter, dict
 #### simpleVersion.js - used basic ways to solve problems, beginner friendly
+#### utils.js  - just for fun, some explore methods, not direct solution to current problem, might useful in future project
 
 # Steps
 Copy repository to your local file
