@@ -1,8 +1,9 @@
 # Grade Report System
 - Generated a Grade Report System for every learners in the current courses, including:
     - Identified current existing learners,
-    - Calculated the average of completed/late assigments for every learner,
-    - Displayed the grade of each completed/late assignment.
+    - Calculated the average grade of all assigments for every learner,
+    - Penalized if submitted assignment late,
+    - Displayed the grade of each submitted assignment if its due.
 
 ```
 // The desired result:
