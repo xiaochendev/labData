@@ -114,92 +114,97 @@ function getLearnerData(course, ag, submissions) {
   // console.log(submissions); 
   // console.log(course);
 
-  // validate course id, ensure ag belong to the course
-  if (ag.course_id !== course.id) {
-    throw new Error(`Invalid input: AssignmentGroup does not belong to the provided Course`);
-  }
-
-  // Map assignments by ID for easier lookup? b/c assignment is an Obj inside an Obj, Easier search for later calc
-  const assignmentsMap = ag.assignments.reduce((acc, assignment) => {
-    acc[assignment.id] = assignment;
-    return acc;
-  }, {});
-  // console.log(assignmentsMap); 
-
-  
-  let today = normalizeDate(new Date());
-  let results = [];
-
-  // most needed info is in submissions <- center of most operations
-
-  submissions.forEach(submission => {
-    // group learner submissions by learner_id
-    const { learner_id, assignment_id, submission: { score, submitted_at } } = submission; // destructure
-    const assignment = assignmentsMap[assignment_id];
-
-    if (!assignment) {
-      throw new Error(`Invalid assignment_id ${assignment_id} for learner ${learner_id}`);
+  try {
+    // validate course id, ensure assigmentGroup belong to the course
+    if (ag.course_id !== course.id) {
+      throw new Error(`Invalid input: AssignmentGroup does not belong to the provided Course`);
     }
 
-    // Penalty: 
-    const submissionDate = normalizeDate(submitted_at);
-    const assignmentDueDate = normalizeDate(assignment.due_at);
+    // Map assignments by ID for easier lookup, Assignments is an bbj inside an obj, easier search for later calc uses
+    const assignmentsMap = ag.assignments.reduce((acc, assignment) => {
+      acc[assignment.id] = assignment;
+      return acc;
+    }, {});
+    // console.log(assignmentsMap); 
 
-    // assignment not due, skip
-    if (assignmentDueDate > today) {
-      return;
-    }
+    let today = normalizeDate(new Date());
+    let results = [];
 
-    // assignment is late
-    const isLate = submissionDate > assignmentDueDate 
-    const penalty = isLate ? 0.10 : 0;    // 10% penalty for late 
+    // most needed info is in submissions <- center of most operations
+    submissions.forEach(submission => {
+      // group learner submissions by learner_id
+      const { learner_id, assignment_id, submission: { score, submitted_at } } = submission; // destructure, easier reference
+      const assignment = assignmentsMap[assignment_id];
 
-    // calculate each assignment score (out of 1.0 scale)
-    const assignmentMaxPoints = assignment.points_possible;
-    const scoreAfterLate = Math.max(0, score - (penalty * assignmentMaxPoints)); 
-    
-    // pevent divided by 0 by checking points_possible
-    const scaledScore = assignmentMaxPoints === 0 ? 0 : scoreAfterLate/assignmentMaxPoints;
-    const roundedScore = parseFloat(scaledScore.toFixed(3));  // round to 3 decimal
-    
-    // Find or create the learner's result obj
-    let result = results.find(result => result.id === learner_id);
-    if (!result) {
-      result = {
-        id: learner_id, 
-        avg: 0, ...Object.fromEntries(ag.assignments.map(a => [a.id, 0]))
-      };
-      results.push(result);
-    }
-
-    // store each assignment score
-    result[assignment_id] = roundedScore;
-  });
-
-  // calc avg for each learners
-  results.forEach(result => {
-    let totalScore = 0;
-    let totalPossiblePoints = 0;
-    
-    ag.assignments.forEach(a => {
-      let dueDate = normalizeDate(a.due_at);
-     // dont count toward avg if assignment not due
-      if (dueDate <= today && result[a.id] !== 0) {
-        let score = result[a.id]
-        totalScore += score * a.points_possible;
-        totalPossiblePoints += a.points_possible;          
+      // validate assignment exists
+      if (!assignment) {
+        throw new Error(`Invalid assignment_id ${assignment_id} for learner ${learner_id}`);
       }
+
+      // assignments penalty: 
+      const submissionDate = normalizeDate(submitted_at);
+      const assignmentDueDate = normalizeDate(assignment.due_at);
+
+      // assignment not due, skip
+      if (assignmentDueDate > today) {
+        return;
+      }
+
+      // assignment is late
+      const isLate = submissionDate > assignmentDueDate 
+      const penalty = isLate ? 0.10 : 0;    // 10% penalty for late 
+
+      // calculate each assignment score (out of 1.0 scale)
+      const assignmentMaxPoints = assignment.points_possible;
+      const scoreAfterLate = Math.max(0, score - (penalty * assignmentMaxPoints)); 
+      
+      // pevent divided by 0 by checking points_possible
+      const scaledScore = assignmentMaxPoints === 0 ? 0 : scoreAfterLate/assignmentMaxPoints;
+      const roundedScore = parseFloat(scaledScore.toFixed(3));  // round to 3 decimal
+      
+      // find or create the learner's result obj
+      let result = results.find(result => result.id === learner_id);
+      if (!result) {
+        result = {
+          id: learner_id, 
+          avg: 0      // assignment score for due n submitted
+          // avg: 0, ...Object.fromEntries(ag.assignments.map(a => [a.id, 0]))  // creates an entry for every assignment for every learner - even its not due
+        };
+        results.push(result);
+      }
+
+      // store each assignment score
+      result[assignment_id] = roundedScore;
     });
-    // calc the avg score       
-    result.avg = totalPossiblePoints > 0 ? parseFloat((totalScore/totalPossiblePoints).toFixed(3)) : 0;
-  });
-  
-  return results;
+
+    // calc avg for each learners
+    for (let result of results) {
+      let totalScore = 0;
+      let totalPossiblePoints = 0;
+      
+      ag.assignments.forEach(a => {
+        let dueDate = normalizeDate(a.due_at);
+      // dont count toward avg if assignment not due
+        if (dueDate <= today && result[a.id] !== 0) {
+          let score = result[a.id]
+          totalScore += score * a.points_possible;
+          totalPossiblePoints += a.points_possible;          
+        }});
+      // calc the avg score, ensure non-zero-divisor       
+      result.avg = totalPossiblePoints > 0 ? parseFloat((totalScore/totalPossiblePoints).toFixed(3)) : 0;
+    };
+    
+    return results;
+    
+  } catch (error) {
+    console.error("Error in getLearnerData", error.message);
+    return [];
+  }
 };
 
 function normalizeDate(date) {
   const d = new Date(date);
-  d.setHours(0, 0, 0, 0);
+  d.setHours(0, 0, 0, 0);  // Normalize all dates to strip time, ensure time diff doesn't affect result
   return d;
 }
 
