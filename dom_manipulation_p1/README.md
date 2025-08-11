@@ -25,7 +25,7 @@ brew install --cask visual-studio-code
 ***Its viewable in your browser by right-clicking open with live server in .html***
 
 
-# Technology
+# Technologies
 - Javascript
 - HTML
 - CSS
