@@ -17,9 +17,9 @@ Copy repository to your local file
 git clone https://github.com/xiaochendev/labData.git
 ```
 
-Change directory to specific lab, ex. control_flow
+Change directory to specific lab, ex. data_collection
 ```
-cd control_flow
+cd data_collection
 ```
 
 Check results by running .js 
@@ -27,5 +27,7 @@ Check results by running .js
 node script.js
 ```
 
-# Technology
+# Technologies
 - Javascript
+- HTML
+- CSS
