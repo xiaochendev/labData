@@ -50,6 +50,24 @@ menuLinks.forEach((link) => {
 });
 
 
+// // Part 3 -------------------------------------------------|
+// // Iterate over the entire menuLinks array and for each "link" object:
+// for(let link of menuLinks){
+//     //  // Create an <a> element.
+//     let menuButton = document.createElement('a');
+
+//     //  // On the new element, add an href attribute with its value set to the href property of the "link" object.
+//     menuButton.setAttribute("href", link.href);
+    
+//     //  // Set the new element's content to the value of the text property of the "link" object.
+//     menuButton.textContent = link.text;
+//     // console.log(menuButton);
+
+//     //  // Append the new element to the topMenuEl element.
+//     topMenuEl.appendChild(menuButton);
+// }
+
+
 // Part 4: Adding Interactivity
 // With the basic structure of the page now generated purely with JavaScript, we have demonstrated the ability to manipulate the DOM in several fundamental ways.
 
