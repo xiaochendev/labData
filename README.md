@@ -4,6 +4,7 @@
 - practical_loops -- __lab 308.03__
 - data_collection -- __lab 308.04__ ***
 - js_fundamentals -- __SBA 308__ *****
+- dom__manipulation -- __lab 316.1.1__
 
 #### script.js - used optmized dynamic ways to solve problems, ex. function, parameter, dict
 #### simpleVersion.js - used basic ways to solve problems, beginner friendly
