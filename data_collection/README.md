@@ -30,5 +30,3 @@ node script.js
 
 # Technologies
 - Javascript
-- HTML
-- CSS
