@@ -4,7 +4,8 @@
 - practical_loops -- __lab 308.03__
 - data_collection -- __lab 308.04__ ***
 - js_fundamentals -- __SBA 308__ *****
-- dom_manipulation_p1 -- __lab 316.1.1__
+- dom_manipulation_p1 -- __lab 316.1__
+- dom_manipulation_p2 -- __lab 316.3__ ***
 
 #### script.js - used optmized dynamic ways to solve problems, ex. function, parameter, dict
 #### simpleVersion.js - used basic ways to solve problems, beginner friendly
@@ -17,9 +18,9 @@ Copy repository to your local file
 git clone https://github.com/xiaochendev/labData.git
 ```
 
-Change directory to specific lab, ex. data_collection
+Change directory to specific lab, ex. js_fundamentals
 ```
-cd data_collection
+cd js_fundamentals
 ```
 
 Check results by running .js 
