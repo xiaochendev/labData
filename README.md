@@ -2,10 +2,10 @@
 - data_manipulation -- __lab 308.01__
 - control_flow -- __lab 308.02__
 - practical_loops -- __lab 308.03__
-- data_collection -- __lab 308.04__ ***
+- data_collection -- __R-lab 308.04__ ***
 - js_fundamentals -- __SBA 308__ *****
 - dom_manipulation_p1 -- __lab 316.1__
-- dom_manipulation_p2 -- __lab 316.3__ ***
+- dom_manipulation_p2 -- __R-lab 316.3__ ***
 
 #### script.js - used optmized dynamic ways to solve problems, ex. function, parameter, dict
 #### simpleVersion.js - used basic ways to solve problems, beginner friendly
