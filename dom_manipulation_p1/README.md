@@ -1,5 +1,5 @@
 # Dom manipulation part I
-- demonstrated the fundamental ways to manipulate the DoM.
+- Demonstrated the fundamental ways to manipulate the DoM.
 
 # Steps:
 
@@ -27,5 +27,3 @@ brew install --cask visual-studio-code
 
 # Technologies
 - Javascript
-- HTML
-- CSS
