@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            box-sizing: border-box;
+        }
+
+        fieldset {
+            margin-top: 5%;
+            margin-left: 30%;
+            border: none;
+        }
+
+        #message {
+            width: 40em;
+            height: 20em;
+        }
+        #homebtn {
+            color: black;
+            text-decoration: none;
+        }
+
+        #homebtn:hover {
+            color: blue;
+        }
+    </style>
+
+</head>
+<body>
+    <fieldset id="contact">
+        <legend style="font-size: large; font-weight: bolder;">CONTACT ME:</legend><br><br>
+        Email: <input type="email" name="email" placeholder="xxxx@gmail.com"><br><br>
+        Name: <input type="text" name="name" placeholder="John"><br><br>
+        <textarea id="message" placeholder="Type your message here"></textarea><br><br>
+        <input type="submit" value="Sent">
+        <br><br><br><br>
+        <a id="homebtn" href="../index.html">Return to home page</a>
+    </fieldset>
+</body>
+</html>
