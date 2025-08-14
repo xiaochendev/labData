@@ -5,18 +5,60 @@
 // using any combination of HTML validation attributes and JavaScript event listeners
 // General Requirements: Whenever any of these validation requirements fail, an appropriate error should be communicated to the user (in most cases, the actual requirement listed below serves as a good error message), and focus should return to the input element that the error originates from. If any requirements fail, the form should not submit.
 
+const registration = document.getElementById(`registration`);
+const rUsername = registration.element[`username`];
+const rEmail = registration.element[`email`];
+const rPassword = registration.element[`password`];
+const rPasswordCheck = registration.element[`passwordCheck`];
+const terms = registration.element[`terms`];
+
+registration.addEventListener(`submit`, registrationVal);
+
+function registrationVal(event) {
+    const usernameVal = registerUsernameVal();
+    if (usernameVal === false){
+        event.returnValue = false;
+        return false;
+    }
+
+    const emailVal = registerEmailVal();
+    if (emailVal === false){
+        event.returnValue = false;
+        return false;
+    }
+
+    const passwordVal = registerPasswordVal();
+    if (passwordVal === false){
+        event.returnValue = false;
+        return false;
+    }
+
+    const termsVal = termsVal();
+    if (termsVal === false){
+        event.returnValue = false;
+        return false;
+    }
+
+}
 // Part 3: Registration Form Validation Requirements
 // Registration Form - Username Validation:
+function registerUsernameVal(){
     // The username cannot be blank.
     // The username must be at least four characters long.
     // The username must contain at least two unique characters.
     // The username cannot contain any special characters or whitespace.
 
+}
+
 // Registration Form - Email Validation:
+function registerEmailVal(){
     // The email must be a valid email address.
     // The email must not be from the domain "example.com."
 
+}
+
 // Registration Form - Password Validation:
+function registerPasswordVal(){
     // Passwords must be at least 12 characters long.
     // Passwords must have at least one uppercase and one lowercase letter.
     // Passwords must contain at least one number.
@@ -24,9 +66,14 @@
     // Passwords cannot contain the word "password" (uppercase, lowercase, or mixed).
     // Passwords cannot contain the username.
     // Both passwords must match.
+}
+
 
 // Registration Form - Terms and Conditions:
+function termsVal(){
     // The terms and conditions must be accepted.
+}
+
 
 // Registration Form - Form Submission:
     // Usually, we would send this information to an external API for processing. In our case, we are going to process and store the data locally for practice purposes.
@@ -42,15 +89,41 @@
     // Usernames must be unique ("that username is already taken" error). Remember that usernames are being stored all lowercase, so "learner" and "Learner" are not unique.
 
 
+const login = document.getElementById(`login`);
+const lUsername = login.element[`username`];
+const lPassword = login.element[`password`];
+
+login.addEventListener(`submit`, loginValidate)
+
+function loginValidate(event){
+    const loginUsernameVal = loginUsernameVal();
+    if (loginUsernameVal === false){
+        event.returnValue = false;
+        return false;
+    }
+
+    const loginPasswordVal = loginPasswordVal();
+    if (loginPasswordVal === false){
+        event.returnValue = false;
+        return false;
+    }
+
+}
 
 // Part 4: Login Form Validation Requirements
     // Login Form - Username Validation:
+function loginUsernameVal(){
         // The username cannot be blank.
         // The username must exist (within localStorage). Remember that usernames are stored in all lowercase, but the username field accepts (and should not invalidate) mixed-case input.
 
+}
+
     // Login Form - Password Validation:
+function loginPasswordVal(){
         // The password cannot be blank.
         // The password must be correct (validate against localStorage).
+
+}
 
     // Login Form - Form Submission:
         // If all validation is successful, clear all form fields and show a success message.
