@@ -1,5 +1,9 @@
-# Dom manipulation part II
-- demonstrated the fundamental ways to manipulate the DoM.
+# Dynamic navigation bar
+- Manipulated the DoM to style web pages.
+- Implemented topMenu and subMenu event handlings to create dynamic navigation bar.
+- Provided links/textContent to different parts of a website.
+- Maintained a consistent design across all pages for easy navigation.
+
 
 # Steps:
 
@@ -10,7 +14,7 @@
 git clone https://github.com/xiaochendev/labData.git
 ```
 
-3. Change directory to specific lab, ex. dom_manipulation_p2
+3. Navigate to dom_manipulation_p2 directory
 ```
 cd dom_manipulation_p2
 ```
