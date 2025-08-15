@@ -1,4 +1,7 @@
-# KBA
+# Flip Card Game
+- Allow user to start game without register
+- Created/shuffled cards when user start/restart the game
+- Cards stayed shown if the user found two matched cards
 
 
 # Steps:
