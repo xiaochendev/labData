@@ -8,7 +8,8 @@
 - js_fundamentals -- __SBA 308__ *****
 - dom_manipulation_p1 -- __lab 316.1__
 - dom_manipulation_p2 -- __R-lab 316.3__ ***
-- form_validation -- __lab 316.4__ 
+- form_validation -- __lab 316.4__
+- dom -- __SBA 316__ ***** 
 
 #### script.js - used optmized dynamic ways to solve problems, ex. function, parameter, dict
 #### simpleVersion.js - used basic ways to solve problems, beginner friendly
