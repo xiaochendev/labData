@@ -42,15 +42,27 @@
           </div>
         </form>
         <br>
-         <p>Already a user? <a href="../index.html">Login</a> or <a href="../index.html">play as Guest</p>
+         <p>Already a user? <a href="../pages/login.html">Login</a> or <a href="../index.html">play as Guest</p>
       </div>
      
       
     </div>
 
-    <!-- Error Display Container -->
-    <div id="errorDisplay"></div>
+    <!---Loading Container-->>
+    <div id="loading" class="modal">
+      <div class="modal-content">
+        <p id="welcomeMessage" style="display:none; font-weight: bold;"></p>
+      </div>
+    </div>
 
+    <!-- Error Display Container -->
+
+    <div id="errorDisplay" class="modal">
+      <div class="modal-content">
+        <p id="alertMessage"></p>
+        <button onclick="closeAlert()">OK</button>
+      </div>
+    </div>
 
     <!-- Font Awesome for Icons -->
     <script
