@@ -10,7 +10,7 @@
 - dom_manipulation_p2 -- __R-lab 316.3__ ***
 - form_validation -- __lab 316.4__
 - dom -- __SBA 316__ ***** 
-- obj_adventure -- __lab308A.2__
+- obj_adventure -- __lab 308A.2__
 
 #### script.js - used optmized dynamic ways to solve problems, ex. function, parameter, dict
 #### simpleVersion.js - used basic ways to solve problems, beginner friendly
