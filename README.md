@@ -17,21 +17,33 @@
 #### utils.js  - just for fun, some explore methods, not direct solution to current problem, might useful in future project
 
 # Steps
-Copy repository to your local file
+1. Copy repository to your local file
 
 ```
 git clone https://github.com/xiaochendev/labData.git
 ```
 
-Change directory to specific lab, ex. js_fundamentals
+2. Change directory to specific lab, ex. js_fundamentals
 ```
 cd js_fundamentals
 ```
 
-Check results by running .js 
+3. Check results by running .js ex. script.js 
 ```
 node script.js
 ```
+
+4. For Web-apps, viewable in your browser by 
+
+5. Installing VS-code if you don't have
+```
+brew install --cask visual-studio-code
+```
+
+6. Download Live Server(by Ritwick Dey) extension in VS-code
+
+***Its viewable in your browser by right-clicking open with live server in .html***
+
 
 # Technologies
 - Javascript
