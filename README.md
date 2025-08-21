@@ -11,6 +11,7 @@
 - form_validation -- __lab 316.4__
 - dom -- __SBA 316__ ***** 
 - obj_adventure -- __lab 308A.2__
+-- promises_asyn_await -- __lab 308A.3__
 
 #### script.js - used optmized dynamic ways to solve problems, ex. function, parameter, dict
 #### simpleVersion.js - used basic ways to solve problems, beginner friendly
