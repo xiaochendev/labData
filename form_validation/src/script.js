@@ -15,7 +15,6 @@ const terms = registration.elements['terms'];
 
 // Registration Form - Form Submission:
     // Usually, we would send this information to an external API for processing. In our case, we are going to process and store the data locally for practice purposes.
-
 registration.addEventListener('submit', registrationVal);
 
 function registrationVal(event) {
@@ -28,7 +27,6 @@ function registrationVal(event) {
     if (!termsVal()) return false;
 
     // If all validation is successful, store the username, email, and password using localStorage.
-    // If you are unfamiliar with localStorage, that is okay! Reference the documentation's "Description" and "Examples" sections to learn how to implement it. If you run into issues speak with a peer or one of your instructors.
     // Consider how you want to store the user data, keeping in mind that there will be quite a few users registering for the site. Perhaps you want to store it with an array of user objects; or maybe an object whose keys are the usernames themselves.
         // Valid usernames should be converted to all lowercase before being stored.
         // Valid emails should be converted to all lowercase before being stored.

@@ -191,7 +191,6 @@
     // Add a static MAX_HEALTH property to the Character class, equal to 100.
     class Character {
         static MAX_HEALTH = 100;
-
         constructor(name) {
             this.name = name;
             this.health = Character.MAX_HEALTH;
