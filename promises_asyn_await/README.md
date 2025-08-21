@@ -1,6 +1,6 @@
 # Promises or asyn/await 
 - fetched users data from databases using given id
-- implemented query to external databases by using promises and asyn/await
+- implemented query func to fetch data from external databases by using promises and asyn/await
 
 # Steps
 Copy repository to your local file
