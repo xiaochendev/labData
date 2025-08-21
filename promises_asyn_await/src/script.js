@@ -1,3 +1,9 @@
+//  Promise.all() runs all promises concurrently & will fail the once any of them fail
+//  Promise.allSettled() run all promises concurrently and wai till all are fufilled OR rejected
+//  Promise.any() runs all prmises concurrently and will take first successful promise
+//  Promise.race() runs all promises concurrently and will reject/fufill based on first response back, 
+                // returns a single Promise that settles with the eventual state of the first input promise that settles. 
+
 // splits its data across multiple databases. 
 // assemble this information using a single function that takes an id parameter and returns a Promise that resolves to an object containing specific data.
 // The object must contain the following information, which will be gathered from the databases:
