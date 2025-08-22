@@ -12,6 +12,7 @@
 - dom -- __SBA 316__ ***** 
 - obj_adventure -- __lab 308A.2__
 - promises_asyn_await -- __lab 308A.3__
+- work_external_data -- __R-lab 308A.4__ ***
 
 #### script.js - used optmized dynamic ways to solve problems, ex. function, parameter, dict
 #### simpleVersion.js - used basic ways to solve problems, beginner friendly
