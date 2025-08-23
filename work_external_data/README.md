@@ -27,9 +27,6 @@ brew install --cask visual-studio-code
 
 ***Its viewable in your browser by right-clicking open with live server in index.html***
 
-```
-npm install axios
-```
 
 # Technologies
 - Javascript
