@@ -5,6 +5,14 @@ axios.defaults.headers.common["x-api-key"] = "live_iK6exUwBqp25oCQXF5MQVOH41oLTQ
 
 // Axios Interceptors
 axios.interceptors.request.use((request) => {
+  // Reset progress bar
+  const progressBar = document.getElementById("progressBar");
+  if (progressBar) {
+    progressBar.style.width = "0%";
+  }
+
+  document.body.style.cursor = "progress"; //  set the cursor to progress; requested from S7
+
   request.metadata = request.metadata || {};
   request.metadata.startTime = new Date().getTime();
   console.log(`✈️ AXIOS Request sent!!: ${request.url}`);
@@ -13,6 +21,17 @@ axios.interceptors.request.use((request) => {
 
 axios.interceptors.response.use(
   (response) => {
+    // used progressBar instead
+    const progressBar = document.getElementById("progressBar");
+    if (progressBar) {
+      progressBar.style.width = "100%";
+      setTimeout(() => {
+        progressBar.style.width = "0%";
+      }, 500);
+    }
+
+    document.body.style.cursor = "default";   // remove progress cursor, request from S7
+
     const endTime = new Date();
     const startTime = response.config.metadata?.startTime || endTime;
     const duration = endTime - startTime;
@@ -20,6 +39,20 @@ axios.interceptors.response.use(
     return response;
   },
   (error) => {
+    // used progressBar instead
+    const progressBar = document.getElementById("progressBar");
+    if (progressBar) {
+      progressBar.style.width = "100%";
+      setTimeout(() => {
+        progressBar.style.width = "0%";
+      }, 500);
+    }
+
+    // reset on error w slight delay, request from S7
+    setTimeout(() => {
+      document.body.style.cursor = "default";
+    }, 200);   
+
     const endTime = new Date();
     const startTime = error.config?.metadata?.startTime || endTime;
     const duration = endTime - startTime;
@@ -218,11 +251,12 @@ async function handleBreedSelect() {
       params: {
         breed_ids: selectedBreedId,
         limit: 10
-      }
+      },
+      onDownloadProgress: updateProgress            //used progressBar instead; would also use onUploadProgress for POST requests in the future.
     });
 
     const cats = res.data;
-    console.log("Fetched cat images:", cats);
+    // console.log("Fetched cat images:", cats);
 
     if (cats.length === 0) {
       infoDump.innerHTML = `<p>No images found for this breed.</p>`;
@@ -279,6 +313,7 @@ async function handleBreedSelect() {
  * - In your request interceptor, set the width of the progressBar element to 0%.
  *  - This is to reset the progress with each request.
  * - Research the axios onDownloadProgress config option.
+ * 
  * - Create a function "updateProgress" that receives a ProgressEvent object.
  *  - Pass this function to the axios onDownloadProgress config option in your event handler.
  * - console.log your ProgressEvent object within updateProgess, and familiarize yourself with its structure.
@@ -288,11 +323,29 @@ async function handleBreedSelect() {
  *   with for future projects.
  */
 
+function updateProgress(event) {
+  const progressBar = document.getElementById("progressBar");
+
+  if (!event.lengthComputable || !progressBar) {
+    return;
+  }
+
+  const percentComplete = (event.loaded / event.total) * 100;
+  progressBar.style.width = `${percentComplete}%`;
+
+  console.log("[ProgressEvent]", event);
+  console.log(`Downloaded: ${event.loaded} / ${event.total} (${percentComplete.toFixed(2)}%)`);
+}
+
+
 /**
  * 7. As a final element of progress indication, add the following to your axios interceptors:
  * - In your request interceptor, set the body element's cursor style to "progress."
  * - In your response interceptor, remove the progress cursor style from the body element.
  */
+
+
+
 /**
  * 8. To practice posting data, we'll create a system to "favourite" certain images.
  * - The skeleton of this function has already been created for you.
@@ -305,26 +358,26 @@ async function handleBreedSelect() {
  * - You can call this function by clicking on the heart at the top right of any image.
  */
 export async function favourite(imgId) {
-  // your code here
+
   try {
     // Get current favourites
-    const res = await axios.get("/favourites");
+    const res = await axios.get(`${API_URL}favourites`);
     const favourites = res.data;
 
     // Check if this image is already a favourite
     const existing = favourites.find(fav => fav.image_id === imgId);
 
     if (existing) {
-      // 🧹 If it's already a favourite, remove it
+      // If it's already a favourite, remove it
       await axios.delete(`/favourites/${existing.id}`);
-      console.log(`Removed favourite: ${imgId}`);
+      console.log(`⛔️ Removed favourite: ${imgId}`);
     } else {
-      // ❤️ Otherwise, add it to favourites
+      // Otherwise, add it to favourites
       await axios.post("/favourites", { image_id: imgId });
-      console.log(`Added favourite: ${imgId}`);
+      console.log(`💋 Added favourite: ${imgId}`);
     }
   } catch (error) {
-    console.error("Error toggling favourite:", error);
+    console.error("⁉️ Error toggling favourite:", error);
   }
 }
 
@@ -338,6 +391,46 @@ export async function favourite(imgId) {
  *    repeat yourself in this section.
  */
 
+async function getFavourites(){
+  const FAV_URL = `${API_URL}favourites`;
+
+    // Reset UI
+  Carousel.clear();
+  infoDump.innerHTML = "";
+  progressBar.style.width = "50%";
+
+    try {
+    const res = await axios.get(FAV_URL);
+    const favourites = res.data;
+    console.log("✅✅ Fetched favourites:", favourites);
+
+    if (favourites.length === 0) {
+      infoDump.innerHTML = `<p>No favourites yet. Click the hearts to add some!</p>`;
+      return;
+    }
+
+    // Build carousel from favourites
+    favourites.forEach(fav => {
+      const item = Carousel.createCarouselItem(
+        fav.image.url,
+        "Favourited Cat",
+        fav.image_id
+      );
+      Carousel.appendCarousel(item);
+    });
+
+    Carousel.start();
+  } catch (err) {
+    console.error("Error loading favourites:", err);
+  } finally {
+    progressBar.style.width = "100%";
+    setTimeout(() => {
+      progressBar.style.width = "0%";
+    }, 1000);
+  }
+
+}
+
 /**
  * 10. Test your site, thoroughly!
  * - What happens when you try to load the Malayan breed?
@@ -346,6 +439,7 @@ export async function favourite(imgId) {
  *   your code should account for this.
  */
 
+
 // Run after page loads
 document.addEventListener("DOMContentLoaded", () => {
   initialLoad();
@@ -353,9 +447,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   breedSelect.selectedIndex = 0;
   handleBreedSelect(); // Load initial carousel
-});
 
-// await initialLoad();
-// breedSelect.addEventListener("change", handleBreedSelect);
-// breedSelect.selectedIndex = 0;
-// handleBreedSelect(); // Load initial carousel
+  
+  getFavouritesBtn.addEventListener("click", getFavourites);
+});
