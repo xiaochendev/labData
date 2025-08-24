@@ -1,7 +1,7 @@
 import * as Carousel from "./carousel.js";
 // import axios from "axios";
 axios.defaults.baseURL = "https://api.thecatapi.com/v1/";
-axios.defaults.headers.common["x-api-key"] = "live_iK6exUwBqp25oCQXF5MQVOH41oLTQc7IyvmrNUig3193Q2SclRsLrpeVJ3qPWbhU";
+axios.defaults.headers.common["x-api-key"] = "[YOUR_API_KEY]";
 
 // Axios Interceptors
 axios.interceptors.request.use((request) => {
