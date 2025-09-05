@@ -15,6 +15,8 @@
 - work_external_data -- __R-lab 308A.4__ ***
 - js_web_app -- __SBA 308A__ *****
 - express_app -- __lab 318.2__
+- restful_api -- __lab 318.3__
+
 
 #### script.js - used optmized dynamic ways to solve problems, ex. function, parameter, dict
 #### simpleVersion.js - used basic ways to solve problems, beginner friendly
