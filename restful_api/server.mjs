@@ -2,6 +2,7 @@
 import express from "express";
 import userRoutes from "./routes/userRoutes.mjs";
 import postRoutes from "./routes/postRoutes.mjs";
+import commentRoutes from "./routes/commentRoutes.mjs";
 import { error } from "./utilities/error.mjs";
 
 // Setups
@@ -62,6 +63,7 @@ app.use("/api", function (req, res, next) {
 // Routes
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
+app.use("/api/comments", commentRoutes);
 
 // Adding some HATEOAS links.
 app.get("/", (req, res) => {
@@ -119,6 +121,11 @@ app.get("/api", (req, res) => {
         href: "api/posts/:id",
         rel: "posts",
         type: "DELETE",
+      },
+      {
+        href: "api/comments",
+        rel: "comments",
+        type: "GET",
       },
     ],
   });

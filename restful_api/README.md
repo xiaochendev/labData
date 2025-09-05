@@ -1,4 +1,5 @@
-# RESTful api
+# RESTful API
+- Add additional features to an existing RESTful Express API.
 
 # Steps
 1. Copy rerepository to your local file
@@ -6,7 +7,7 @@
 git clone https://github.com/xiaochendev/labData.git
 ```
 
-2. Change to lab direcotry, ex. express_lab
+2. Change to lab direcotry, ex. restful_api
 ```
 cd restful_api
 ```
@@ -32,7 +33,7 @@ localhost:3000
 
 
 
-## cassandra
+## Cassandra
 ```
 npm install cassandra-driver
 
@@ -44,7 +45,7 @@ client.execute('select key from system.local', (err, result) => {
     console.log(result.rows[0])
 })
 ```
-## couchbase
+## Couchbase
 ```
 npm install couchnode
 
@@ -61,7 +62,7 @@ bucket.insert('document-key', {name: 'Matt', shoeSize: 13}, (err, result) => {
 })
 ```
 
-## couchDB
+## CouchDB
 
 ```
 npm install nano
@@ -83,7 +84,7 @@ books.insert({name: 'the art of world' }, null, (err, body) => {
 
 
 
-## levelDB
+## LevelDB
 ```
 npm install level levelup leveldown
 
@@ -125,7 +126,7 @@ connection.query('SELECT 1 + 1 AS Solution', (err, rows, fields) => {
 connection.end()
 ```
 
-## mangoDB
+## MangoDB
 
 ```
 npm install mongodb
@@ -166,7 +167,7 @@ session.readTransaction((tx) => {
 
 ```
 
-## oracle
+## Oracle
 
 ```
 npm install oracledb
@@ -202,7 +203,7 @@ async function getEmployee (empId) {
 getEmployee(101)
 ```
 
-## postgreSQL
+## PostgreSQL
 ```
 npm install pg-promise
 
@@ -220,7 +221,7 @@ db.one('SELECT $1 AS value', 123)
 ```
 
 
-## redis
+## Redis
 ```
 npm install redis
 
@@ -302,7 +303,7 @@ db.serialize(() => {
 db.close()
 ```
 
-## elsticsearch
+## Elasticsearch
 ```
 npm install elasticsearch
 
