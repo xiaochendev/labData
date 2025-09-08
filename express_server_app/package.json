@@ -1,0 +1,17 @@
+{
+  "name": "express_server_app",
+  "version": "1.0.0",
+  "description": "-  # Steps 1. Copy rerepository to your local file ``` git clone https://github.com/xiaochendev/labData.git ```",
+  "main": "server.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10"
+  }
+}
