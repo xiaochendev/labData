@@ -2,6 +2,15 @@ import express from "express";
 import { posts } from "../data/posts.mjs";
 const router = express.Router();
 
+// GET /api/posts?userId=<VALUE>
+  // Retrieves all posts by a user with the specified postId.
+  // It is common for APIs to have multiple endpoints that accomplish the same task. This route uses a "userId" query parameter to filter posts, while the one above uses a route parameter.
+// GET /posts/:id/comments
+  // Retrieves all comments made on the post with the specified id.
+// GET /posts/:id/comments?userId=<VALUE>
+  // Retrieves all comments made on the post with the specified id by a user with the specified userId.
+
+
 // @route GET /api/posts
 // @desc Get all posts
 // @access Public

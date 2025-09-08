@@ -2,6 +2,13 @@ import express from "express";
 import { users } from "../data/users.mjs";
 const router = express.Router();
 
+// GET /api/users/:id/posts
+  // Retrieves all posts by a user with the specified id.
+// GET /users/:id/comments
+  // Retrieves comments made by the user with the specified id.
+// GET /users/:id/comments?postId=<VALUE>
+  // Retrieves comments made by the user with the specified id on the post with the specified postId.
+
 // @route GET /api/users
 // @desc Get all users
 // @access Public
