@@ -1,5 +1,7 @@
 # RESTful API
-- Add additional features to an existing RESTful Express API.
+- practiced RESTful API by creating multiple features
+- allowed to retrive comments, posts, users info
+- succefully performed CRUD on comments, posts, users through APIs
 
 # Steps
 1. Copy rerepository to your local file
