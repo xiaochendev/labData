@@ -1,5 +1,6 @@
 import express from "express";
 import { posts } from "../data/posts.mjs";
+import { comments } from "../data/comments.mjs";
 const router = express.Router();
 
 // GET /api/posts?userId=<VALUE>
@@ -14,12 +15,16 @@ const router = express.Router();
 // @route GET /api/posts
 // @desc Get all posts
 // @access Public
-
 router
   .route("/")
   .get((req, res) => {
     res.json(posts);
   })
+
+  // @route   POST /api/posts
+  // @desc    Create a new post
+  // @body    userId=<number>, title=<string>, content=<string>
+  // @access  Public
   .post((req, res) => {
     const { userId, title, content } = req.body; // grabbing data the client entered through req.body
     let id = posts[posts.length - 1].id + 1; // creating a new id
@@ -40,10 +45,15 @@ router
     }
   });
 
-//  @route GET /api/posts/:id
-//  @desc Get ONE post
-//  @access Public
-
+// @route   GET /api/posts/:id
+// @desc    Get a single post by its ID
+// @access  Public
+// @route   PATCH /api/posts/:id
+// @desc    Update a post by its ID
+// @access  Public
+// @route   DELETE /api/posts/:id
+// @desc    Delete a post by its ID
+// @access  Public
 router
   .route("/:id")
   .get((req, res) => {
@@ -71,6 +81,7 @@ router
       res.json(posts);
     } else next();
   })
+
   .delete((req, res, next) => {
     // find the post that the client want to delete
     const id = req.params.id;
@@ -86,5 +97,30 @@ router
       res.json(posts);
     } else next();
   });
+
+// @route   GET /api/posts/:id/comments
+// @desc    Retrieve all comments made on a specific post
+// @query   userId (optional) - Filters comments to only those made by the specified user
+// @param   id - ID of the post to retrieve comments for
+// @access  Public
+router
+  .route('/:id/comments')
+  .get((req, res, next) => {
+      const { id } = req.params;
+      const { userId } = req.query;
+
+      let postComments = comments.filter((comment) => comment.postId == id);
+
+      // Filter by userId if provided
+      if (userId) {
+          postComments = postComments.filter((comment) => comment.userId == userId);
+      }
+    
+      if (postComments.length > 0) {
+          res.json(postComments);
+      } else {
+        next(); // Triggers global 404 if no comments found
+      }
+  })
 
 export default router;
