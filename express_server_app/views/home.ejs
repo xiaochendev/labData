@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= title %></title>
+  <link rel="stylesheet" href="../styles/style.css">
+</head>
+<body>
+  <h1>Welcome</h1>
+  <nav>
+    <a href="/about">About</a>
+    <a href="/users/Tester">Tester's Page</a>
+  </nav>
+
+  <h2>Contact Us</h2>
+  <form action="/submit" method="POST">
+    <label>Name: <input type="text" name="name" required /></label><br>
+    <label>Email: <input type="email" name="email" required /></label><br>
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>
