@@ -30,7 +30,7 @@ localhost:3000
 # API Reference
 |  VERB |   PATH | QUERY PARAMS | DESCRIPTION |
 |----------|----------|--------|------------------------------|
-| Users |  - |  - |  - |
+| Users |   |   |   |
 |  GET  | /api/users |  - |  Get all users  |
 |  POST  | /api/users |  - |  Create a new user  |
 |  GET  | /api/users/:id |  - |  Get user by ID |
@@ -38,14 +38,14 @@ localhost:3000
 |  DELETE  | /api/users/:id |  - |  Delete user by ID |
 |  GET  | /api/users/:id/posts |  - |  Get all posts created by the user |
 |  GET  | /api/users/:id/comments |  postId |  Get all comments by the user; filter by post if postId is provided|
-| Posts |  - |  - |  - |
+| Posts |   |   |   |
 |  GET  | /api/posts |  userId |  Get all posts; filter by userId  |
 |  POST  | /api/posts |  - | Create a new post |
 |  GET  | /api/posts/:id |  - | Get post by ID |
 |  PATCH  | /api/posts/:id |  - | Update post fields by ID |
 |  DELETE  | /api/posts/:id |  - | Delete post by ID |
 |  GET  | /api/posts/:id/comments |  userId | Get all comments on post; filter by userId if provided |
-| Comments |  - |  - |  - |
+| Comments |   |   |   |
 |  GET  | /api/comments |  userId, postId |  Get all comments; filter by userId, postId, or both  |
 |  POST  | /api/comments |  - |  Create a new comment  |
 |  GET  | /api/comments/:id |  - |  Get comment by ID  |
