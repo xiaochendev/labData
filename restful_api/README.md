@@ -24,10 +24,13 @@ npm install
 npm start dev
 ```
 
-5. Its viewable in your browser by entering
+5. Its viewable in your browser by entering for certain path, ex.
 ```
-localhost:3000
+localhost:3000/api/users
 ```
+
+Notes: Install Extensions (Thunder Client or Postman) in Visual Studio allow you to test following APIs.
+
 
 # API Reference
 |  VERB |   PATH | QUERY PARAMS | DESCRIPTION |
