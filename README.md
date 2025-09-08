@@ -16,7 +16,7 @@
 - js_web_app -- __SBA 308A__ *****
 - express_app -- __lab 318.2__
 - restful_api -- __lab 318.3__
-- express_server_app __SBA 318__ *******
+- express_server_app -- __SBA 318__ *******
 
 
 #### script.js - used optmized dynamic ways to solve problems, ex. function, parameter, dict
