@@ -1,5 +1,6 @@
-# 
-- 
+# UI Admin 
+- UI for non-technical admins to CRUD on Posts, Users, Comments
+
 # Steps
 1. Copy rerepository to your local file
 ```
@@ -58,8 +59,8 @@ Notes: Install Extensions (Thunder Client or Postman) in Visual Studio allow you
 |  DELETE  | /api/comments/:id |  - |  Delete comment by ID |
 
 
-
 # Technologies
 - express.js
+- node.js
 - css
 - html

@@ -27,7 +27,8 @@ router
             );
         }
 
-        res.json(filteredComments);
+        // res.json(filteredComments);
+        res.render('comments', {title: 'comments', comments: filteredComments});
     })
 
     // @route   POST /api/comments
@@ -49,7 +50,10 @@ router
         };
 
         comments.push(newComment);
-        res.status(201).json(newComment);
+        // res.status(201).json(newComment);
+        req.flash('success', 'Comment created successfully');
+        res.redirect(`/api/comments`);
+        // res.redirect(`/api/posts/${postId}`);
     })
 
 // @router GET api/comments/:id
@@ -63,7 +67,8 @@ router
         const comment = comments.find((c) => c.id == id);
 
         if (comment) {
-            res.json(comment);
+            // res.json(comment);
+            res.render('comment', {title: 'comment', comment});
         } else {
             next(); // Triggers global 404 handler
         }
@@ -84,7 +89,10 @@ router
 
         if (body) {
             comment.body = body;
-            res.json(comment);
+            // res.json(comment);
+            req.flash('success', 'Comment updated successfully');
+            // res.render('comment', {title: 'comment', comment});
+            res.redirect(`/api/comments/${id}`);
         } else {
             res.status(400).json({ error: 'No update provided' });
         }
@@ -100,7 +108,10 @@ router
 
         if (index !== -1) {
             const deleted = comments.splice(index, 1);
-            res.json({ msg: 'Comment deleted', deleted });
+            // res.json({ msg: 'Comment deleted', deleted });
+            // res.render('comment', {title: 'comment deleted', comment: deleted[0]});
+            req.flash('success', 'Comment deleted successfully');
+            res.redirect('/api/comments');
         } else {
             next(); // Comment not found
         }

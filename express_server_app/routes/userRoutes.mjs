@@ -18,7 +18,8 @@ const router = express.Router();
 router
   .route("/")
   .get((req, res) => {
-    res.json(users);
+    // res.json(users);
+      res.render("users", { users }); 
   })
 
   // @route   POST /api/users
@@ -42,7 +43,9 @@ router
         email,
       };
       users.push(user);
-      res.json(user);
+      // res.json(user);
+      req.flash('success', 'User created successfully');
+      res.redirect('/api/users')
     } else res.status(400).json({ msg: "Insuffecient Data" });
   });
 
@@ -52,10 +55,15 @@ router
 router
   .route("/:id")
   .get((req, res, next) => {
+      const id = req.params.id;
       const user = users.find((user) => user.id == req.params.id);
+      const userPosts = posts.filter(p => p.userId == id);
+      const userComments = comments.filter(c => c.userId == id);
 
-      if (user) res.json(user);
-      else next();
+      if (user) {
+        // res.json(user);
+        res.render("user", { user, userPosts, userComments}); 
+      } else next();  // Triggers 404
   })
 
   // @route   PATCH /api/users/:id
@@ -77,7 +85,9 @@ router
 
     // send a response back to the client
     if (user) {
-        res.json(users);
+        // res.json(users);
+        req.flash('success', 'User updated successfully');
+        res.redirect(`/api/users/${user.id}`);
     } else next();
   })
 
@@ -96,7 +106,9 @@ router
 
     // send a response back to the client
     if (user) {
-        res.json(users);
+        // res.json(users);
+        req.flash('success', 'User deleted successfully');
+        res.redirect(`/api/users`);
     } else next();
   });
 
@@ -110,7 +122,11 @@ router
         const userPosts = posts.filter((post) => post.userId == id);
         
         if (userPosts.length > 0) {
-            res.json(userPosts);
+            const user = users.find(u => u.id == id);
+
+            // res.json(userPosts);
+            req.flash('success', 'Posts retrieved successfully');
+            res.render('user-posts', { title: 'User Posts', user, posts: userPosts });
         } else {
             next(); // No posts found — let global 404 handler handle it
         }
@@ -134,10 +150,24 @@ router
             userComments = userComments.filter((comment) => comment.postId == postId);
         }
         
+        // if (userComments.length > 0) {
+        //     res.json(userComments);
+        // } else {
+        //     next(); // No comments found
+        // }
+
         if (userComments.length > 0) {
-            res.json(userComments);
+            const user = users.find(u => u.id == id);
+            const post = posts.find(p => p.id == postId);
+
+            res.render('user-comments', { 
+              title: 'User Comments', 
+              user, 
+              post, 
+              userComments 
+            });
         } else {
-            next(); // No comments found
+            next();
         }
     })
 

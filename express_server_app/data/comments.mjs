@@ -15,6 +15,30 @@ export const comments = [
         postId: 3,
         body: "lorem too bad"
     },
+       {
+        id: 3,
+        userId: 2,
+        postId: 2,
+        body: "lorem tooooooooo good"
+    },
+    {
+        id: 4,
+        userId: 3,
+        postId: 3,
+        body: "best"
+    },
+    {
+        id: 4,
+        userId: 5,
+        postId: 5,
+        body: "i dont like it"
+    },
+    {
+        id: 4,
+        userId: 6,
+        postId: 6,
+        body: "i xxx like it"
+    },
     {
         id: 3,
         userId: 1,
