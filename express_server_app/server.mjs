@@ -9,8 +9,6 @@ import userRoutes from './routes/userRoutes.mjs';
 import postRoutes from './routes/postRoutes.mjs';
 import commentRoutes from './routes/commentRoutes.mjs';
 import methodOverride from 'method-override';
-
-
 import { error } from './utilities/error.mjs';
 import { validateJsonMiddleware } from './utilities/validateJson.mjs'
 
@@ -60,7 +58,6 @@ app.use('/about', aboutRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/comments', commentRoutes);
-
 
 // Global Err Handling
 app.use((req, res) => {
