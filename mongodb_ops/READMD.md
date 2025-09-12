@@ -37,11 +37,11 @@ Notes: Install Extensions (Thunder Client or Postman) in Visual Studio allow you
 |  PATCH|  	/api/grades/:id	|  id	|  Add to scores array  |
 |  PUT	|  /api/grades/:id	|  id	|  Remove from scores array |  
 |  DELETE|  /api/grades/:id	|  id	|  Delete grade by ID   |  
-|  GET	|  /api/grades/:id/learner	|  id	|  Get grades by learner ID |  
-|  DELETE|  /api/grades/:id/learner	|  id	|  Delete grades by learner ID  |  
+|  GET	|  /api/grades/:id/student	|  id	|  Get grades by student ID |  
+|  DELETE|  /api/grades/:id/student	|  id	|  Delete grades by student ID  |  
 |  GET	|  /api/grades/:id/class	|  id	|  Get grades by class ID   |  
 |  DELETE|  /api/grades/:id/class	|  id	|  Delete grades by class ID    |  
-|  GET	|  /api/grades/:classId/class/:learnerId/learner	|  classId, learnerId	|  Get grades by class and learner ID|  
+|  GET	|  /api/grades/:classId/class/:studentId/student	|  classId, studentId	|  Get grades by class and student ID|  
 
 # Technologies
 - Node.js

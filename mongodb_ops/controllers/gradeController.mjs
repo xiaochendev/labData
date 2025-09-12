@@ -41,7 +41,7 @@ let getById = async (req, res) => {
   else res.json(results);
 };
 
-let getByLearnerId = async (req, res) => {
+let getByStudentId = async (req, res) => {
   let query = { student_id: Number(req.params.id) };
 
   // Choose collection
@@ -52,7 +52,7 @@ let getByLearnerId = async (req, res) => {
 
   //Return the results
   if (results.length == 0)
-    res.status(404).json({ msg: "❌ Learner Not Found" });
+    res.status(404).json({ msg: "❌ Student Not Found" });
   else res.json(results);
 };
 
@@ -67,15 +67,15 @@ let getByClassId = async (req, res) => {
 
   //Return the results
   if (results.length == 0)
-    res.status(404).json({ msg: "❌ Learner Not Found" });
+    res.status(404).json({ msg: "❌ Student Not Found" });
   else res.json(results);
 };
 
-let getByLearnerClass = async (req, res) => {
+let getByStudentClass = async (req, res) => {
   let query = {
     $and: [
       { class_id: Number(req.params.classId) },
-      { student_id: Number(req.params.learnerId) },
+      { student_id: Number(req.params.studentId) },
     ],
   };
 
@@ -84,7 +84,7 @@ let getByLearnerClass = async (req, res) => {
   let results = await grades.find(query).limit(10).toArray();
 
   if (results.length == 0)
-    res.status(404).json({ msg: `❌ Class/learner Not Found` });
+    res.status(404).json({ msg: `❌ Class/student Not Found` });
   else res.json(results);
 };
 
@@ -136,7 +136,7 @@ let removeFromArray = async (req, res) => {
   res.json(result);
 };
 
-let deleteLearner = async (req, res) => {
+let deleteStudent = async (req, res) => {
   let query = { student_id: Number(req.params.id) };
 
   let grades = await db.collection("grades");
@@ -158,12 +158,12 @@ export default {
   getAll,
   createOne,
   getById,
-  getByLearnerId,
+  getByStudentId,
   getByClassId,
-  getByLearnerClass,
+  getByStudentClass,
   addScoreToArray,
   deleteGrade,
   removeFromArray,
-  deleteLearner,
+  deleteStudent,
   deleteClass,
 };
