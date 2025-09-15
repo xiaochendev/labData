@@ -5,6 +5,7 @@ import globalErr from './middlewares/globalErr.mjs';
 import log from './middlewares/loggingMiddleware.mjs';
 import connectDB from './db/conn.mjs';
 import mammalRoutes from './routes/mammalRoutes.mjs';
+import avianRoutes from './routes/avianRoutes.mjs';
 
 // setup
 dotenv.config()
@@ -23,6 +24,7 @@ const PORT = process.env.PORT || 3001;
 
     // routes
     app.use('/api/mammals', mammalRoutes);
+    app.use('/api/avian', avianRoutes);
 
     // error handling
     app.use(globalErr);
