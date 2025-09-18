@@ -33,4 +33,8 @@ const avianSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
+avianSchema.statics.availableForAdoption = function () {
+  return this.find({ isAdopted: false });
+};
+
 export default mongoose.model("Avian", avianSchema);

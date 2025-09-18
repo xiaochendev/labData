@@ -28,4 +28,8 @@ const reptileSchema = new mongoose.Schema(
   { timestamps: true }, 
 );
 
+reptileSchema.statics.availableForAdoption = function () {
+  return this.find({ isAdopted: false });
+};
+
 export default mongoose.model("Reptile", reptileSchema);

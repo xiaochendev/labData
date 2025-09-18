@@ -36,4 +36,8 @@ const fishSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
+fishSchema.statics.availableForAdoption = function () {
+  return this.find({ isAdopted: false });
+};
+
 export default mongoose.model("Fish", fishSchema);
