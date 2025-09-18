@@ -20,6 +20,7 @@
 - mongodb_ops -- __lab 319.4__
 - mongoose -- __lab 319.5__ 
 - mongodb_app -- __SBA 319__ *******
+- react_page_layout -- __lab 320__ 
 
 
 #### script.js - used optmized dynamic ways to solve problems, ex. function, parameter, dict
