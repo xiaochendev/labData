@@ -15,6 +15,13 @@ const mammalSchema = new mongoose.Schema(
         "temperate",
         "polar",
         "aquatic",
+        "grassland",
+        "forest", 
+        "wetland", 
+        "urban", 
+        "coastal", 
+        "mountain", 
+        "tundra",
       ],
       required: true,
       validate: {
