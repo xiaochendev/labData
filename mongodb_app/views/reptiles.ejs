@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Reptiles</title>
+    <link rel="stylesheet" href="../styles/style.css">
+</head>
+<body>
+    <%- include('partials/nav') %>
+    <%- include('partials/messages') %> 
+
+    <main class="reptiles-page">
+      <!-- Create Form -->
+      <section class="reptiles-form">
+        <h2>Create New Reptile</h2>
+        <form action="/api/reptiles" method="POST">
+            <label for="name">Name:</label><br/>
+            <input type="text" id="name" name="name" required><br/><br/>
+
+            <label for="species">Species:</label><br/>
+            <input type="text" id="species" name="species" required><br/><br/>
+
+            <label for="age">Age (in years):</label><br/>
+            <input type="number" id="age" name="age" min="0" required><br/><br/>
+
+            <label for="habitat">Habitat (comma-separated):</label><br/>
+            <input type="text" id="habitat" name="habitat" required><br/><br/>
+
+            <label for="isVenomous">Venomous:</label>
+            <input type="checkbox" id="isVenomous" name="isVenomous"><br/><br/>
+
+            <label for="maxElevation">Max Elevation (m):</label><br/>
+            <input type="number" id="maxElevation" name="maxElevation" min="0"><br/><br/>
+
+            <label for="isAdopted">Adopted:</label>
+            <input type="checkbox" id="isAdopted" name="isAdopted"><br/><br/>
+
+            <label for="adoptionDate">Adoption Date:</label><br/>
+            <input type="date" id="adoptionDate" name="adoptionDate"><br/><br/>
+
+            <label for="adopterName">Adopter Name:</label><br/>
+            <input type="text" id="adopterName" name="adopterName"><br/><br/>
+
+            <label for="adopterContact">Adopter Contact:</label><br/>
+            <input type="text" id="adopterContact" name="adopterContact"><br/><br/>
+
+            <label for="arrivalDate">Arrival Date:</label><br/>
+            <input type="date" id="arrivalDate" name="arrivalDate"><br/><br/>
+
+            <label for="healthStatus">Health Status:</label><br/>
+            <input type="text" id="healthStatus" name="healthStatus"><br/><br/>
+
+            <label for="vaccinated">Vaccinated:</label>
+            <input type="checkbox" id="vaccinated" name="vaccinated"><br/><br/>
+
+            <label for="microchipId">Microchip ID:</label><br/>
+            <input type="text" id="microchipId" name="microchipId"><br/><br/>
+
+            <button type="submit">Create Reptile</button>
+        </form>
+      </section>
+
+      <!--  List View -->
+      <section class="reptiles-section">
+        <% if (reptiles && reptiles.length > 0) { %>
+          <ul class="reptiles-list">
+            <% reptiles.forEach(reptile => { %>
+              <li>
+                <a href="/api/reptiles/<%= reptile._id %>">
+                  <strong><%= reptile.name %></strong> — <%= reptile.species %>
+                </a>
+                <span> | Age: <%= reptile.age %> | 
+                <% if (reptile.isVenomous) { %>
+                     Venomous
+                <% } else { %>
+                     Non-venomous
+                <% } %>
+                </span>
+                <% if (reptile.isAdopted) { %>
+                    <em>(Adopted)</em>
+                <% } else { %>
+                    <em>(Available)</em>
+                <% } %>
+              </li>
+            <% }) %>
+          </ul>
+        <% } else { %>
+          <p>No reptiles found.</p>
+        <% } %>
+      </section>
+    </main>
+</body>
+</html>

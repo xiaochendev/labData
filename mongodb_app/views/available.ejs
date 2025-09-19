@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html  lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>available animals for adoption</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <%- include('partials/nav') %>
+    <%- include('partials/messages') %>
+
+    <main class="available-page">
+
+      <section>
+        <h1>Available Animals for Adoption</h1>
+      </section>
+
+      <section class="animals-list">
+            <% if (animals.length === 0) { %>
+                <p>No animals available at the moment.</p>
+            <% } else { %>
+                <ul>
+                <% animals.forEach(animal => { %>
+                    <li>
+                    <strong><%= animal.name %></strong> - 
+                    <%= animal.species || animal.type %> - 
+                    <%= animal.habitat.join(", ") %>
+                    </li>
+                <% }); %>
+                </ul>
+            <% } %>
+      </section>
+
+  </main> 
+</body>
+
+</html>
