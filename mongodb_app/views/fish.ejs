@@ -8,10 +8,10 @@
 </head>
 
 <body>
-    <%- include('partials/nav') %>
-    <%- include('partials/messages') %>
-
     <main class="fish-page">
+        <%- include('partials/nav') %>
+        <%- include('partials/messages') %>
+        
         <!-- Edit Fish Form -->
         <section class="fish-form">
             <h2>Edit Fish</h2>
@@ -26,7 +26,7 @@
 
                 <label>Age:
                     <input type="number" name="age" value="<%= fish.age %>" min="0" required />
-                </label>
+                </label><br/>
 
                 <label>Water Type:
                     <select name="waterType" required>
@@ -41,7 +41,7 @@
                     <input type="text" name="habitat" 
                         value="<%= fish.habitat ? fish.habitat.join(', ') : '' %>" 
                         placeholder="e.g. reef, river" required />
-                </label>
+                </label><br/>
 
                 <label>Max Depth (meters):
                     <input type="number" name="maxDepth" value="<%= fish.maxDepth || '' %>" min="0" />
@@ -54,7 +54,7 @@
 
                 <label>Adoption Date:
                     <input type="date" name="adoptionDate" value="<%= fish.adoptionDate ? fish.adoptionDate.toISOString().split('T')[0] : '' %>" />
-                </label>
+                </label><br/>
 
                 <label>Adopter Name:
                     <input type="text" name="adopterName" value="<%= fish.adopterName || '' %>" />

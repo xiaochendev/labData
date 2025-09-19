@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>All Avians</title>
-  <link rel="stylesheet" href="/styles/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Avians</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <%- include('partials/nav') %>
-    <%- include('partials/messages') %>
-
     <main class="avians-page">
+        <%- include('partials/nav') %>
+        <%- include('partials/messages') %>
+        
         <!-- Create New Avian Form -->
         <section class="avians-form">
             <h2>Create New Avian</h2>
@@ -19,29 +20,29 @@
                 </label>
 
                 <label>Species:
-                <input type="text" name="species" required>
+                <input type="text" name="species">
                 </label>
 
                 <label>
                 <input type="checkbox" name="domesticated">
                 Domesticated?
-                </label>
+                </label><br/>
 
                 <label>Breed (only if domesticated):
                 <input type="text" name="breed">
                 </label>
 
                 <label>Age:
-                <input type="number" name="age" min="0" required>
-                </label>
+                <input type="number" name="age" min="0">
+                </label><br/>
 
                 <label>Habitat (comma-separated):
-                <input type="text" name="habitat" placeholder="e.g. forest, urban" required>
+                <input type="text" name="habitat" placeholder="e.g. forest, urban">
                 </label>
 
                 <label>Max Elevation (meters):
                 <input type="number" name="maxElevation" min="0">
-                </label>
+                </label><br/>
 
                 <label>
                 <input type="checkbox" name="isAdopted">
@@ -54,14 +55,14 @@
 
                 <label>Adopter Name:
                 <input type="text" name="adopterName">
-                </label>
+                </label><br/>
 
                 <label>Adopter Contact:
                 <input type="text" name="adopterContact">
                 </label>
 
                 <label>Arrival Date:
-                <input type="date" name="arrivalDate" required>
+                <input type="date" name="arrivalDate">
                 </label>
 
                 <label>Health Status:
@@ -90,6 +91,7 @@
                 <a href="/api/avians/<%= avian._id %>">
                     <strong><%= avian.name %></strong> — <%= avian.species %>
                 </a>
+                <span> | Age: <%= avian.age %> | 
                 <% if (avian.isAdopted) { %>
                     <em>(Adopted)</em>
                 <% } else { %>

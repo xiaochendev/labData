@@ -8,22 +8,21 @@
 </head>
 
 <body>
-    <%- include('partials/nav') %>
-    <%- include('partials/messages') %>
-
     <main class="mammal-page">
+        <%- include('partials/nav') %>
+        <%- include('partials/messages') %>
         <!--  Edit Form -->
         <section class="mammal-form">
             <h2>Edit Mammal</h2>
             <form action="/api/mammals/<%= mammal._id %>?_method=PATCH" method="POST">
                 <label>Name: <input type="text" name="name" value="<%= mammal.name %>" required /></label>
-                <label>Species: <input type="text" name="species" value="<%= mammal.species %>" required /></label>
-                <label>Age: <input type="number" name="age" value="<%= mammal.age %>" min="0" required /></label>
+                <label>Species: <input type="text" name="species" value="<%= mammal.species %>" /></label>
+                <label>Age: <input type="number" name="age" value="<%= mammal.age %>" min="0" required /></label><br/>
                 <label>Habitat (comma-separated): 
                     <input type="text" name="habitat" 
                         value="<%= mammal.habitat ? mammal.habitat.join(', ') : '' %>" 
                         placeholder="e.g. desert, forest" required />
-                </label>
+                </label><br/>
                 <label>
                     <input type="checkbox" name="isAdopted" <%= mammal.isAdopted ? "checked" : "" %> />
                     Adopted
@@ -33,7 +32,7 @@
                 </label>
                 <label>Adopter Name:
                     <input type="text" name="adopterName" value="<%= mammal.adopterName || '' %>" />
-                </label>
+                </label><br/>
                 <label>Adopter Contact:
                     <input type="text" name="adopterContact" value="<%= mammal.adopterContact || '' %>" />
                 </label>

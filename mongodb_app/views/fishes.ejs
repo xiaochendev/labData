@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Fishes</title>
-    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <%- include('partials/nav') %>
-    <%- include('partials/messages') %> 
 
     <main class="fishes-page">
+        <%- include('partials/nav') %>
+        <%- include('partials/messages') %> 
         <section class="fishes-form">
             <h2>Create New Fish</h2>
             <form action="/api/fishes" method="POST">
@@ -18,12 +19,12 @@
                 </label>
 
                 <label>Species:
-                    <input type="text" name="species" required>
+                    <input type="text" name="species">
                 </label>
 
                 <label>Age:
                     <input type="number" name="age" min="0" required>
-                </label>
+                </label> <br/>
 
                 <label>Water Type:
                     <select name="waterType" required>
@@ -36,7 +37,7 @@
 
                 <label>Habitat (comma separated):
                     <input type="text" name="habitat" placeholder="e.g. reef, river" required>
-                </label>
+                </label><br/>
 
                 <label>Max Depth (meters):
                     <input type="number" name="maxDepth" min="0">
@@ -44,7 +45,7 @@
 
                 <label>Arrival Date:
                     <input type="date" name="arrivalDate">
-                </label>
+                </label><br/>
 
                 <label>Health Status:
                     <input type="text" name="healthStatus" placeholder="e.g. healthy, injured">
@@ -57,7 +58,7 @@
 
                 <label>Microchip ID:
                     <input type="text" name="microchipId">
-                </label>
+                </label><br/>
 
                 <label>
                     <input type="checkbox" name="isAdopted">
@@ -70,7 +71,7 @@
 
                 <label>Adopter Name:
                     <input type="text" name="adopterName">
-                </label>
+                </label><br/>
 
                 <label>Adopter Contact:
                     <input type="text" name="adopterContact">
@@ -88,6 +89,7 @@
                             <a href="/api/fishes/<%= fish._id %>">
                                 <strong><%= fish.name %></strong> — <%= fish.species %>
                             </a>
+                            <span> | Age: <%= fish.age %> | 
                             <% if (fish.isAdopted) { %>
                                 <em>(Adopted)</em>
                             <% } else { %>

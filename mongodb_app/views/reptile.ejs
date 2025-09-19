@@ -8,10 +8,10 @@
 </head>
 
 <body>
-    <%- include('partials/nav') %>
-    <%- include('partials/messages') %>
-
     <main class="reptile-page">
+      <%- include('partials/nav') %>
+      <%- include('partials/messages') %>
+      
         <section class="reptile-form">
             <h2>Edit Reptile</h2>
             <form action="/api/reptiles/<%= reptile.id %>?_method=PATCH" method="POST">
@@ -25,7 +25,7 @@
           
               <label>Age:
                 <input type="number" name="age" value="<%= reptile.age %>" min="0" required />
-              </label>
+              </label><br/>
           
               <label>Habitat (comma-separated):
                 <input type="text" name="habitat" 
@@ -35,7 +35,7 @@
           
               <label>Max Elevation (m):
                 <input type="number" name="maxElevation" min="0" value="<%= reptile.maxElevation || '' %>" />
-              </label>
+              </label><br/>
           
               <label>
                 <input type="checkbox" name="isVenomous" <%= reptile.isVenomous ? 'checked' : '' %> />
@@ -53,7 +53,7 @@
           
               <label>Adopter Name:
                 <input type="text" name="adopterName" value="<%= reptile.adopterName || '' %>" />
-              </label>
+              </label><br/>
           
               <label>Adopter Contact:
                 <input type="text" name="adopterContact" value="<%= reptile.adopterContact || '' %>" />
