@@ -3,8 +3,8 @@ import mongoose from "mongoose";
 const reptileSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
-    species: { type: String, required: true },
-    age: { type: Number, min: 0, required: true },
+    species: { type: String },
+    age: { type: Number, min: 0, default: 0},
     isVenomous: { type: Boolean, default: false },
     habitat: {
       type: [String],       // reptile often live in mult. habitats
@@ -20,7 +20,7 @@ const reptileSchema = new mongoose.Schema(
     adoptionDate: { type: Date },
     adopterName: { type: String },
     adopterContact: { type: String },
-    arrivalDate: { type: Date, required: true, default: Date.now },
+    arrivalDate: { type: Date, default: Date.now },
     healthStatus: { type: String, default: "unknown" },
     vaccinated: { type: Boolean, default: false },
     microchipId: { type: String },

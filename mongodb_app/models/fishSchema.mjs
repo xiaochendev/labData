@@ -3,8 +3,8 @@ import mongoose from "mongoose";
 const fishSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
-    species: { type: String, required: true },
-    age: { type: Number, min: 0, required: true },
+    species: { type: String },
+    age: { type: Number, min: 0, default: 0 },
     waterType: {
       type: String,
       enum: {

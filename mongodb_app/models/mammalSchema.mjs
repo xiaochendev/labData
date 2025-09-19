@@ -3,8 +3,8 @@ import mongoose from "mongoose";
 const mammalSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
-    species: { type: String, required: true },
-    age: { type: Number, min: 0, required: true },
+    species: { type: String },
+    age: { type: Number, min: 0, default: 0},
     habitat: {
       type: [String],           // use array instead single str cuz live multiple habitat
       enum: [                    // Use of enum for habitat ensures valid input.
@@ -33,7 +33,7 @@ const mammalSchema = new mongoose.Schema(
       adoptionDate: { type: Date },
       adopterName: { type: String },
       adopterContact: { type: String },
-      arrivalDate: { type: Date, required: true, default: Date.now },
+      arrivalDate: { type: Date, default: Date.now },
       healthStatus: { type: String, default: "unknown" },
       vaccinated: { type: Boolean, default: false },
       microchipId: { type: String },
