@@ -1,0 +1,58 @@
+let employeeList = [
+  {
+    firstName: "Julie",
+    lastName: "Taylor",
+    jobTitle: "VP of Marketing",
+    officeNum: "781-000-0002",
+    mobileNum: "617-000-0002",
+    SMS: "617-000-0002",
+    email: "jtaylor@fakeemail.com",
+  },
+  {
+    firstName: "James",
+    lastName: "King",
+    jobTitle: "President & CEO",
+    officeNum: "781-000-0001",
+    mobileNum: "617-000-0001",
+    SMS: "617-000-0001",
+    email: "jking@fakeemail.com",
+  },
+  {
+    firstName: "Eugene",
+    lastName: "Lee",
+    jobTitle: "CFO",
+    officeNum: "781-000-0003",
+    mobileNum: "617-000-0003",
+    SMS: "617-000-0003",
+    email: "elee@fakeemail.com",
+  },
+  {
+    firstName: "John",
+    lastName: "Williams",
+    jobTitle: "VP of Engineering",
+    officeNum: "781-000-0004",
+    mobileNum: "617-000-0004",
+    SMS: "617-000-0004",
+    email: "jwilliams@fakeemail.com",
+  },
+  {
+    firstName: "Ray",
+    lastName: "Moore",
+    jobTitle: "VP of Sales",
+    officeNum: "781-000-0005",
+    mobileNum: "617-000-0005",
+    SMS: "617-000-0005",
+    email: "rmoore@fakeemail.com",
+  },
+  {
+    firstName: "Paula",
+    lastName: "Jones",
+    jobTitle: "QA Manager",
+    officeNum: "781-000-0006",
+    mobileNum: "617-000-0006",
+    SMS: "617-000-0006",
+    email: "pjones@fakeemail.com",
+  },
+];
+
+export default employeeList;
