@@ -68,11 +68,23 @@ router
   .route("/")
   .post(async (req, res) => {
     try {
+      // Parse habitat string into array if it exists
+      if (req.body.habitat) {
+        req.body.habitat = req.body.habitat.split(",").map(h => h.trim());
+      } else {
+        req.body.habitat = [];
+      }
+
+      // Checkbox for adopted returns "on" if checked, so convert to boolean
+      req.body.adopted = req.body.adopted === 'on';
+
       // Perform Action
       let newMammal = await Mammal.create(req.body);
 
       // Return Response
-      res.json(newMammal);
+      // res.json(newMammal);
+      req.flash("Success", "Mammal created successfully");
+      res.redirect(`/api/mammals`);
     } catch (err) {
       console.error(err.message);
       res.status(500).json({ msg: `❌ Error - ${err.message}` });
@@ -85,18 +97,37 @@ router
     try {
       let allMammals = await Mammal.find({});
 
-      res.json(allMammals);
+      // res.json(allMammals);
+      res.render("mammals", {mammals: allMammals });
     } catch (err) {
       console.error(err.message);
       res.status(500).json({ msg: `❌ Error - ${err.message}` });
     }
   });
 
-// @route   PUT /api/mammals/:id
-// @desc    Update a mammal by ID
-// @access  Public (or Private if add auth)
+
 router
   .route("/:id")
+  // @route   GET /api/mammals/:id
+  // @desc    Get a mammal by ID
+  // @access  Public (or Private if add auth)
+  .get(async (req, res) => {
+    try {
+      const mammal = await Mammal.findById(req.params.id);
+
+      if (!mammal){
+        return res.status(404).render('404', { msg: 'Mammal not found' }); // optional 404 page
+      }
+
+      res.render('mammal', { mammal: mammal });
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).json({ msg: `❌ Error - ${err.message}`});
+    }
+  })
+  // @route   PUT /api/mammals/:id
+  // @desc    Update a mammal by ID
+  // @access  Public (or Private if add auth)
   .put(async (req, res) => {
     try {
       let updatedMammal = await Mammal.findByIdAndUpdate(
