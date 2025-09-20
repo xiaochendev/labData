@@ -47,13 +47,20 @@ router
     .get(async (req, res) => {
         try {
           const [mammals, reptiles, fishes, avians] = await Promise.all([
-            Mammal.find({}),
-            Reptile.find({}),
-            Fish.find({}),
-            Avian.find({}),
+            // Mammal.find({}), // return mongoose document, add .lean() get back JS obj
+            Mammal.find({}).lean(),
+            Reptile.find({}).lean(),
+            Fish.find({}).lean(),
+            Avian.find({}).lean(),
           ]);
-      
-          const allAnimals = [...mammals, ...reptiles, ...fishes, ...avians];
+          
+          // Add a `route` property to each animal
+          const taggedMammals = mammals.map((animal) => ({ ...animal, route: "mammals" }));
+          const taggedReptiles = reptiles.map((animal) => ({ ...animal, route: "reptiles"}));
+          const taggedFishes = fishes.map((animal) => ({ ...animal, route: "fishes" }));
+          const taggedAvians = avians.map((animal) => ({ ...animal, route: "avians" }));
+
+          const allAnimals = [...taggedMammals, ...taggedAvians, ...taggedFishes, ...taggedReptiles];
       
           // res.json(allAvailable);
           res.render("home", {animals: allAnimals })
@@ -71,14 +78,19 @@ router
     .route("/available")
     .get(async (req, res) => {
         try {
-          const [mammals, reptiles, fish] = await Promise.all([
-            Mammal.availableForAdoption(),
-            Reptile.availableForAdoption(),
-            Fish.availableForAdoption(),
-            Avian.availableForAdoption(),
+          const [mammals, reptiles, fishes, avians] = await Promise.all([
+            Mammal.availableForAdoption().lean(),
+            Reptile.availableForAdoption().lean(),
+            Fish.availableForAdoption().lean(),
+            Avian.availableForAdoption().lean(),
           ]);
-      
-          const allAvailable = [...mammals, ...reptiles, ...fish, ...avians];
+          // Add a `route` property to each animal
+          const taggedMammals = mammals.map((animal) => ({ ...animal, route: "mammals" }));
+          const taggedReptiles = reptiles.map((animal) => ({ ...animal, route: "reptiles"}));
+          const taggedFishes = fishes.map((animal) => ({ ...animal, route: "fishes" }));
+          const taggedAvians = avians.map((animal) => ({ ...animal, route: "avians" }));
+
+          const allAvailable = [...taggedMammals, ...taggedAvians, ...taggedFishes, ...taggedReptiles];
       
           // res.json(allAvailable);
           res.render("available", { animals: allAvailable });

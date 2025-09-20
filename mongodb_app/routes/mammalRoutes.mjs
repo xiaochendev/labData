@@ -68,23 +68,74 @@ router
   .route("/")
   .post(async (req, res) => {
     try {
+      const errors = [];
+
+      // fields geting from input
+      const {
+        name,
+        species,
+        age,
+        habitat,
+        arrivalDate,
+        healthStatus,
+        vaccinated,
+        microchipId,
+        isAdopted,
+        adoptionDate,
+        adopterName,
+        adopterContact
+      } = req.body;
+
       // Parse habitat string into array if it exists
-      if (req.body.habitat) {
-        req.body.habitat = req.body.habitat.split(",").map(h => h.trim());
-      } else {
-        req.body.habitat = [];
-      }
+      // if (req.body.habitat) {
+      //   req.body.habitat = req.body.habitat.split(",").map(h => h.trim());
+      // } else {
+      //   req.body.habitat = [];
+      // }
+      const parsedHabitat = habitat ? habitat.split(",").map(h=> h.trim().toLowerCase()).filter(Boolean) : [];
+      const validHabitats = [
+        "tropical", "desert", "domesticated", "prairie", "temperate", "polar",
+        "aquatic", "grassland", "forest", "wetland", "urban", "coastal", "mountain", "tundra"
+      ];
+      const habitatIsValid = parsedHabitat.every(h => validHabitats.includes(h));
 
-      // Checkbox for adopted returns "on" if checked, so convert to boolean
-      req.body.adopted = req.body.adopted === 'on';
+      // validate
+      if (!name || name.trim() == "") errors.push("Name is required");
+      if (parsedHabitat.length == 0)  errors.push("At least one habitat is required");
+      if (!habitatIsValid) errors.push(`Invalid habitat(s): ${parsedHabitat.filter(h=> !validHabitats.includes(h)).join(", ")}`);
+      if (age && age < 0) errors.push('Age cannot be Negative');
 
-      // Perform Action
-      let newMammal = await Mammal.create(req.body);
+      if (errors.length > 0) {
+        req.flash("error", errors);
+        req.flash("formData", req.body); // preserve user input
+        return res.redirect(`/api/mammals`);
+      } 
 
+      // // Perform Action
+      // let newMammal = await Mammal.create(req.body);
       // Return Response
       // res.json(newMammal);
-      req.flash("Success", "Mammal created successfully");
-      res.redirect(`/api/mammals`);
+
+      // Normalize checkboxes
+      const newMammalData = {
+        name,
+        species,
+        age: age ? Number(age) : undefined,
+        habitat: parsedHabitat,
+        arrivalDate: arrivalDate || undefined,
+        healthStatus,
+        vaccinated: vaccinated === "on",
+        microchipId,
+        isAdopted: isAdopted === "on",
+        adoptionDate: adoptionDate || undefined,
+        adopterName,
+        adopterContact,
+      };
+
+      // created return response
+      await Mammal.create(newMammalData);
+      req.flash("success", "Mammal created successfully!");
+      res.redirect("/api/mammals");
     } catch (err) {
       console.error(err.message);
       res.status(500).json({ msg: `❌ Error - ${err.message}` });
@@ -95,10 +146,11 @@ router
   // @access  Public
   .get(async (req, res) => {
     try {
-      let allMammals = await Mammal.find({});
+      const mammals = await Mammal.find({});
+      const formData = req.flash("formData")[0] || {};
 
       // res.json(allMammals);
-      res.render("mammals", {mammals: allMammals });
+      res.render("mammals", { mammals, formData });
     } catch (err) {
       console.error(err.message);
       res.status(500).json({ msg: `❌ Error - ${err.message}` });
@@ -130,13 +182,75 @@ router
   // @access  Public (or Private if add auth)
   .put(async (req, res) => {
     try {
-      let updatedMammal = await Mammal.findByIdAndUpdate(
+      // let updatedMammal = await Mammal.findByIdAndUpdate(
+      //   req.params.id,
+      //   req.body,
+      //   { new: true } // Option to allow newly updated object to be sent back
+      // );
+
+      // res.json(updatedMammal);
+      const errors = [];
+      const {
+        name,
+        species,
+        age,
+        habitat,
+        arrivalDate,
+        healthStatus,
+        vaccinated,
+        microchipId,
+        isAdopted,
+        adoptionDate,
+        adopterName,
+        adopterContact
+      } = req.body;
+
+      // parse habitat
+      const parsedHabitat = habitat
+        ? habitat.split(",").map(h => h.trim().toLowerCase()).filter(Boolean)
+        : [];
+      
+      const validHabitats = [
+          "tropical", "desert", "domesticated", "prairie", "temperate", "polar",
+          "aquatic", "grassland", "forest", "wetland", "urban", "coastal", "mountain", "tundra"
+        ];
+
+      const habitatIsValid = parsedHabitat.every(h => validHabitats.includes(h));
+
+      // Validation
+      if (!name || name.trim() === "") errors.push("Name is required.");
+      if (parsedHabitat.length === 0) errors.push("At least one habitat is required.");
+      if (!habitatIsValid) errors.push(`Invalid habitat(s): ${parsedHabitat.filter(h => !validHabitats.includes(h)).join(", ")}`);
+      if (age && age < 0) errors.push("Age cannot be negative.");
+      if (errors.length > 0) {
+        req.flash("error", errors);
+        req.flash('formData', req.body);    
+        return res.redirect(`/api/mammals/${req.params.id}`);
+      }
+
+      const updatedMammalData = {
+        name,
+        species,
+        age: age ? Number(age) : undefined,
+        habitat: parsedHabitat,
+        arrivalDate: arrivalDate || undefined,
+        healthStatus,
+        vaccinated: vaccinated === "on",
+        microchipId,
+        isAdopted: isAdopted === "on",
+        adoptionDate: adoptionDate || undefined,
+        adopterName,
+        adopterContact
+      };
+
+      const updatedMammal = await Mammal.findByIdAndUpdate(
         req.params.id,
-        req.body,
-        { new: true } // Option to allow newly updated object to be sent back
+        updatedMammalData,
+        { new: true }
       );
 
-      res.json(updatedMammal);
+      req.flash("success", "Mammal updated successfully.");
+      res.redirect(`/api/mammals/${req.params.id}`);
     } catch (err) {
       console.error(err.message);
       res.status(500).json({ msg: `❌ Error - ${err.message}` });
@@ -149,7 +263,9 @@ router
     try {
       let deleteMammal = await Mammal.findByIdAndDelete(req.params.id);
 
-      res.json(deleteMammal);
+      // res.json(deleteMammal);
+      req.flash("success", "Mammal Deleted successfully.");
+      res.redirect('/api/mammals/');
     } catch (err) {
       console.error(err.message);
       res.status(500).json({ msg: `❌ Error - ${err.message}` });
