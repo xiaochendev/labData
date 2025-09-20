@@ -28,7 +28,7 @@ const fishSchema = new mongoose.Schema(
     adoptionDate: { type: Date },
     adopterName: { type: String },
     adopterContact: { type: String },
-    arrivalDate: { type: Date, required: true, default: Date.now },
+    arrivalDate: { type: Date, default: Date.now },
     healthStatus: { type: String, default: "unknown" },
     vaccinated: { type: Boolean, default: false },
     microchipId: { type: String },
