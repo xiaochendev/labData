@@ -35,11 +35,12 @@ const PORT = process.env.PORT || 3001;
     app.use(log);
 
     app.use(methodOverride('_method'));         // Enable PATCH/DELETE via HTML Forms, use ?method=PATCH or ?method=DELETE.
+    
     // Setup sessions
     app.use(session({
-      secret: 'mySecret123',     // can use env variables
+      secret: "secret-key",   // can use env variables
       resave: false,
-      saveUninitialized: true
+      saveUninitialized: false    // won't save unless you add data to it
     }));
 
     // connect-flash setting
