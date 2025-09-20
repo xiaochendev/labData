@@ -14,7 +14,7 @@
       
         <section class="reptile-form">
             <h2>Edit Reptile</h2>
-            <form action="/api/reptiles/<%= reptile.id %>?_method=PATCH" method="POST">
+            <form action="/api/reptiles/<%= reptile.id %>?_method=PUT" method="POST">
               <label>Name:
                 <input type="text" name="name" value="<%= reptile.name %>" required />
               </label>

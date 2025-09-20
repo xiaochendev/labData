@@ -15,7 +15,7 @@
         <!-- Edit Fish Form -->
         <section class="fish-form">
             <h2>Edit Fish</h2>
-            <form action="/api/fishes/<%= fish.id %>?_method=PATCH" method="POST">
+            <form action="/api/fishes/<%= fish.id %>?_method=PUT" method="POST">
                 <label>Name:
                     <input type="text" name="name" value="<%= fish.name %>" required />
                 </label>
@@ -25,7 +25,7 @@
                 </label>
 
                 <label>Age:
-                    <input type="number" name="age" value="<%= fish.age %>" min="0" required />
+                    <input type="number" name="age" value="<%= fish.age %>" min="0" />
                 </label><br/>
 
                 <label>Water Type:
@@ -65,7 +65,7 @@
                 </label>
 
                 <label>Arrival Date:
-                    <input type="date" name="arrivalDate" value="<%= fish.arrivalDate ? fish.arrivalDate.toISOString().split('T')[0] : '' %>" required />
+                    <input type="date" name="arrivalDate" value="<%= fish.arrivalDate ? fish.arrivalDate.toISOString().split('T')[0] : '' %>" />
                 </label>
 
                 <label>Health Status:

@@ -16,16 +16,16 @@
         <h2>Create New Reptile</h2>
         <form action="/api/reptiles" method="POST">
             <label for="name">Name:</label>
-            <input type="text" id="name" name="name" value="required" required>
+            <input type="text" id="name" name="name" value="<%= formData.name || '' %>" required>
 
             <label for="species">Species:</label>
-            <input type="text" id="species" name="species" value="required">
+            <input type="text" id="species" name="species">
 
             <label for="age">Age (in years):</label>
-            <input type="number" id="age" name="age" min="0"><br/>
+            <input type="number" id="age" name="age" min="0" value="<%= formData.age || '' %>"><br/>
 
             <label for="habitat">Habitat (comma-separated):</label>
-            <input type="text" id="habitat" name="habitat" required>
+            <input type="text" id="habitat" name="habitat" value="<%= formData.habitat || '' %>" placeholder=" ex. desert, forest, wetland, grassland, tropical, aquatic" required>
 
             <label for="isVenomous">Venomous:</label>
             <input type="checkbox" id="isVenomous" name="isVenomous">
@@ -34,7 +34,7 @@
             <input type="number" id="maxElevation" name="maxElevation" min="0">
 
             <label for="isAdopted">Adopted:</label>
-            <input type="checkbox" id="isAdopted" name="isAdopted">
+            <input type="checkbox" id="isAdopted" name="isAdopted" <%= formData.isAdopted ? 'checked' : '' %> >
 
             <label for="adoptionDate">Adoption Date:</label>
             <input type="date" id="adoptionDate" name="adoptionDate">
@@ -46,7 +46,7 @@
             <input type="text" id="adopterContact" name="adopterContact">
 
             <label for="arrivalDate">Arrival Date:</label>
-            <input type="date" id="arrivalDate" name="arrivalDate">
+            <input type="date" id="arrivalDate" name="arrivalDate" value="<%= formData.arrivalDate || '' %>">
 
             <label for="healthStatus">Health Status:</label>
             <input type="text" id="healthStatus" name="healthStatus">

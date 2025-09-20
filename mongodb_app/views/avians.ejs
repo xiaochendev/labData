@@ -16,7 +16,7 @@
             <h2>Create New Avian</h2>
             <form action="/api/avians" method="POST">
                 <label>Name:
-                <input type="text" name="name" required>
+                <input type="text" name="name" value="<%= formData.name || '' %>" required>
                 </label>
 
                 <label>Species:
@@ -33,11 +33,11 @@
                 </label>
 
                 <label>Age:
-                <input type="number" name="age" min="0">
+                <input type="number" name="age" min="0" value="<%= formData.age || '' %>">
                 </label><br/>
 
                 <label>Habitat (comma-separated):
-                <input type="text" name="habitat" placeholder="e.g. forest, urban">
+                <input type="text" name="habitat" value="<%= formData.habitat || '' %>" placeholder="e.g. forest, urban">
                 </label>
 
                 <label>Max Elevation (meters):
@@ -45,7 +45,7 @@
                 </label><br/>
 
                 <label>
-                <input type="checkbox" name="isAdopted">
+                <input type="checkbox" name="isAdopted" <%= formData.isAdopted ? 'checked' : '' %> >
                 Adopted?
                 </label>
 
@@ -62,7 +62,7 @@
                 </label>
 
                 <label>Arrival Date:
-                <input type="date" name="arrivalDate">
+                <input type="date" name="arrivalDate" value="<%= formData.arrivalDate || '' %>">
                 </label>
 
                 <label>Health Status:

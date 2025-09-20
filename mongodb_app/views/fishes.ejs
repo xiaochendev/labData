@@ -15,7 +15,7 @@
             <h2>Create New Fish</h2>
             <form action="/api/fishes" method="POST">
                 <label>Name:
-                    <input type="text" name="name" required>
+                    <input type="text" name="name" value="<%= formData.name || '' %>" required>
                 </label>
 
                 <label>Species:
@@ -23,11 +23,11 @@
                 </label>
 
                 <label>Age:
-                    <input type="number" name="age" min="0" required>
+                    <input type="number" name="age" min="0" value="<%= formData.age || '' %>">
                 </label> <br/>
 
                 <label>Water Type:
-                    <select name="waterType" required>
+                    <select name="waterType" value="<%= formData.waterType || '' %>" required>
                         <option value="">-- Select --</option>
                         <option value="freshwater">Freshwater</option>
                         <option value="saltwater">Saltwater</option>
@@ -36,7 +36,7 @@
                 </label>
 
                 <label>Habitat (comma separated):
-                    <input type="text" name="habitat" placeholder="e.g. reef, river" required>
+                    <input type="text" name="habitat" value="<%= formData.habitat || '' %>" placeholder="e.g. reef, river" required>
                 </label><br/>
 
                 <label>Max Depth (meters):
@@ -44,7 +44,7 @@
                 </label>
 
                 <label>Arrival Date:
-                    <input type="date" name="arrivalDate">
+                    <input type="date" name="arrivalDate" value="<%= formData.arrivalDate || '' %>">
                 </label><br/>
 
                 <label>Health Status:
@@ -61,7 +61,7 @@
                 </label><br/>
 
                 <label>
-                    <input type="checkbox" name="isAdopted">
+                    <input type="checkbox" name="isAdopted" <%= formData.isAdopted ? 'checked' : '' %> >
                     Adopted
                 </label>
 

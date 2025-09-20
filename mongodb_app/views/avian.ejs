@@ -13,7 +13,7 @@
         <%- include('partials/messages') %>
         <section class="avian-form">
             <h2>Edit avian</h2>
-            <form action="/api/avians/<%= avian.id %>?_method=PATCH" method="POST">
+            <form action="/api/avians/<%= avian.id %>?_method=PUT" method="POST">
                 <label>Name: <input type="text" name="name" value="<%= avian.name %>" required /></label>
                 <label>Species: <input type="text" name="species" value="<%= avian.species %>" required /></label>
                 <label>Age: <input type="number" name="age" value="<%= avian.age %>" min="0" required /></label><br/>
