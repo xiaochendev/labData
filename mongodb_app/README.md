@@ -33,7 +33,7 @@ npm start
 
 7. Add Seed-data into your mongodb First by visiting broswer
 ```
-localhost:3000/api/animals/seed
+localhost:3000/seed
 ```
 - notes: Your supposed to see 'All animal data seeded successfully' if Your set MONGO_URI corretly in .env
 
