@@ -21,6 +21,7 @@
 - mongoose -- __lab 319.5__ 
 - mongodb_app -- __SBA 319__ *******
 - react_page_layout -- __lab 320__ 
+- render_array -- __lab 320.3__
 
 
 #### script.js - used optmized dynamic ways to solve problems, ex. function, parameter, dict
