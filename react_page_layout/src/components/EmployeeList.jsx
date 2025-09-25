@@ -1,24 +1,19 @@
 import EmployeeListItem from "./EmployeeListItem";
-import employeeData from './employeeData.mjs';
+import employeeListData from "../utilities/employeeData.mjs";
 
-export default function EmployeeList() {
-
+export default function EmployeeList({ setCurrent }) {
   let style = {
-    listStyle: 'none',
+    listStyle: "none",
     margin: "0",
     padding: "0",
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '5px'
-  }
+    display: "flex",
+    flexDirection: "column",
+    gap: "5px",
+  };
 
-  let loadedList = employeeData.map((em)=>{
-    return <EmployeeListItem {...em} />
-  })
+  let loadedList = employeeListData.map((emp) => {
+    return <EmployeeListItem setCurrent={setCurrent} emp={emp} key={emp.email} />;
+  });
 
-  return (
-    <ul style={style}>
-     {loadedList}
-    </ul>
-  );
+  return <ul style={style}>{loadedList}</ul>;
 }

@@ -1,17 +1,21 @@
-export default function EmployeeListItem({ firstName, lastName, jobTitle }) {
+export default function EmployeeListItem({ emp, setCurrent }) {
 
     let style = {
         border: '3px solid gray',
         borderRadius: '15px',
     }
 
+    function handleClick(){
+      setCurrent(emp);
+    }
+
 
   return (
-    <li style={style}>
+    <li onClick={handleClick} style={style}>
       <h3>
-        {firstName} {lastName}
+        {emp.firstName} {emp.lastName}
       </h3>
-      <h4>{jobTitle}</h4>
+      <h4>{emp.jobTitle}</h4>
     </li>
   );
 }

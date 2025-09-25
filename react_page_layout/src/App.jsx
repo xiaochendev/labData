@@ -1,35 +1,20 @@
-import React from 'react';
-import './App.css';
-import HomePage from './components/HomePage';
-import EmployeePage from './components/EmployeePage';
+import "./App.css";
+import { useState } from "react";
+import data from './utilities/employeeData.mjs';
+
+// Components
+import HomePage from "./components/HomePage";
+import EmployeePage from "./components/EmployeePage";
 
 function App() {
+  const [current, setCurrent] = useState(null);
+
   return (
-    <div className="app">
-      <HomePage />
-      <EmployeePage />
-    </div>
+    <main>
+      <HomePage setCurrent={setCurrent} />
+      <EmployeePage employee={current} />
+    </main>
   );
 }
 
 export default App;
-
-// import { useState } from 'react';
-// import reactLogo from './assets/react.svg';
-// import viteLogo from '/vite.svg';
-// import './App.css';
-// import HomePage from '../pages/HomePage.jsx';
-
-// function App() {
-//   const [count, setCount] = useState(0)
-
-//   return (
-//     <>
-//      <div className="app">
-//         <HomePage />
-//      </div>
-//     </>
-//   )
-// }
-
-// export default App
