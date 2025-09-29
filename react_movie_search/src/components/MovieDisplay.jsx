@@ -20,3 +20,4 @@ export default function MovieDisplay({ movie }){
   // Ternary operator will determine which functions JSX we will return
   return movie ? loaded() : loading();
 }
+

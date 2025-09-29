@@ -36,11 +36,17 @@ function App() {
       }
     };
     
-    // This will run on the first render but not on subsquent renders
+    // try to change the useEffect we created so that it grabs a random movie on each page refresh, rather than always starting with "Clueless."
     useEffect(() => {
-      getMovie("Clueless");
+      const randomMovies = ["Clueless", "Titantic", "Test", "Mean Girls", "The Dark Night"];
+      const randomIndex = Math.floor(Math.random() * randomMovies.length);
+      const randomMovie = randomMovies[randomIndex];
+
+      // This will run on the first render but not on subsquent renders
+      // getMovie("Clueless");
+      
+      getMovie(randomMovie);
     }, []);
-  
   
     // We pass the getMovie function as a prop called moviesearch
     // We pass movie as props to movie display
@@ -50,7 +56,6 @@ function App() {
         <MovieDisplay movie={movie} />
       </div>
     );
-
 };
 
 export default App;
