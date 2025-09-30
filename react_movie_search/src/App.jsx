@@ -58,4 +58,29 @@ function App() {
     );
 };
 
+// async function getMovieData(searchTerm) {
+//     function getRandomIntegerInclusive(min, max) {
+//       min = Math.ceil(min); // Ensure min is an integer
+//       max = Math.floor(max); // Ensure max is an integer
+//       return Math.floor(Math.random() * (max - min + 1)) + min;
+//     }
+
+//     let rand = getRandomIntegerInclusive(1000000, 1800000)
+
+//     const apiKey = "c9cfdcec";
+//     const apiStr = searchTerm
+//       ? `http://www.omdbapi.com/?apikey=${apiKey}&t=${searchTerm}`
+//       : `http://www.omdbapi.com/?apikey=${apiKey}&i=tt${rand}`;
+
+//     try {
+//       let res = await fetch(apiStr);
+//       res = await res.json();
+
+//       console.log(res);
+//       setMovieData(res);
+//     } catch (err) {
+//       console.error(err.message);
+//     }
+//   }
+
 export default App;
