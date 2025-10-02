@@ -24,6 +24,7 @@
 - render_array -- __lab 320.3__
 - react_movie_search -- __lab 320.7__
 - consume_3rd_api -- __lab 320.8__
+- build_todo_list -- __lab 320.9__ ***
 - trivia_game -- __group project__
 
 
