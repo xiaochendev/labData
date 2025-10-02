@@ -19,12 +19,24 @@ import ListsReducer from "./components/ListsReducer.jsx"
 export default function App() {
   const [todos, setTodos] = useState("");
   const [lists, dispatch] = useReducer(ListsReducer, initialState);
-   
-  const todosList = lists.map((item) => {
-    return (
-      <ListsItem key={item.id} item={item} dispatch={dispatch} />
-    );
+  const [filter, setFilter] = useState("all");    // all | active | completed filter
+
+  // const todosList = lists.map((item) => {
+  //   return (
+  //     <ListsItem key={item.id} item={item} dispatch={dispatch} />
+  //   );
+  // });
+
+  // use filteredTodo instead
+  const filteredTodos = lists.filter((todo) => {
+    if (filter === "active") return !todo.completed;
+    if (filter === "completed") return todo.completed;
+    return true;
   });
+
+  const todosList = filteredTodos.map((item) => (
+    <ListsItem key={item.id} item={item} dispatch={dispatch} />
+  ));
 
   return (
     <>
@@ -39,6 +51,13 @@ export default function App() {
           Add New Todo
         </ActionButton>
       </div>
+
+      <div style={{ marginTop: "20px" }}>
+        <button onClick={() => setFilter("all")}>All</button>
+        <button onClick={() => setFilter("active")}>Active</button>
+        <button onClick={() => setFilter("completed")}>Completed</button>
+      </div>
+
       <div>
         <h2>Todos</h2>
         {todosList}
