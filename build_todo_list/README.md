@@ -1,5 +1,5 @@
 #  To Do List App
-- Allow the users to add, edit, remove item from todo lists
+- Allow the user to add, edit, remove todo from todo lists
 
 # Steps
 1. Copy rerepository to your local file
