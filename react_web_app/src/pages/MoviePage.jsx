@@ -6,7 +6,7 @@ import MovieDisplay from '../components/MovieDisplay';
 export default function MoviePage() {
   const API_KEY = import.meta.env.VITE_OMDB_API_KEY; // for Vite, all env variable must start w VITE_
   // State to hold movie data
-  const [movie, setMovie] = useState(null);
+  const [movie, setMovie] = useState(undefined);  // undefined = not searched yet
   const [loading, setLoading] = useState(false);
   const [searchParams] = useSearchParams();
   const query = searchParams.get('q'); // get ?q= from URL
@@ -14,9 +14,11 @@ export default function MoviePage() {
   // Function to get movies
   const getMovie = async(searchTerm) => {
     try {
+      const title = searchTerm.trim() === "" ? "Inception" : searchTerm; // default to "Inception" if empty
+
       // Make fetch request and store the response
       const response = await fetch(
-        `http://www.omdbapi.com/?apikey=${API_KEY}&t=${searchTerm}`
+        `http://www.omdbapi.com/?apikey=${API_KEY}&t=${title}`
       );
       // Parse JSON response into a JavaScript object
       const data = await response.json();
@@ -48,11 +50,20 @@ export default function MoviePage() {
       
       {loading && <h2>Loading...</h2>}
 
+      {/* Movie found */}
       {!loading && movie && (
-          <MovieDisplay movie={movie} />
+        <MovieDisplay movie={movie} />
       )}
 
-      {!loading && !movie && <p>Try searching for a any title (e.g. "Godfather")</p>}
+      {/* Movie not found */}
+      {!loading && movie === null && (
+        <p style={{ color: 'red'}}>Movie Not Found. Trying something else</p>
+      )}
+
+      {/* No search yet */}
+      {!loading && typeof movie === 'undefined' && (
+        <p>Try searching for a any title (e.g. "Godfather")</p>
+      )}
 
     </div>
   );
