@@ -1,4 +1,11 @@
 #  M
+<!-- Create REACT application that serves a purpose/solves a problem
+Fetch Data from a 3rd API
+Display data on the DOM
+Technologies needed:
+    useState OR useReducer - manage state
+    useEffect - to automatically fetch data/handle effects
+    react-router-dom - simulate 3 pages -->
 
 
 # Steps
@@ -12,17 +19,27 @@ git clone https://github.com/xiaochendev/labData.git
 cd react_web_app
 ```
 
-3. Install all the required dependencies
+3. Create .env in the dir 
+```
+touch .env
+```
+
+4. Add variables in .env
+```
+VITE_OMDB_API_KEY=<YOUR_OMDB_API_KEY>
+```
+
+5. Install all the required dependencies
 ```
 npm install
 ```
 
-4. Start the frontend
+6. Start the frontend
 ```
 npm run dev
 ```
 
-5. Its viewable in your browser by entering
+7. Its viewable in your browser by entering
 
 ```
 http://localhost:5173/
