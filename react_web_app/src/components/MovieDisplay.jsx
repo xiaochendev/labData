@@ -6,8 +6,8 @@ export default function MovieDisplay({ movie }){
       <div className="movie-card">
         <h1>{movie.Title}</h1>
         <h2>{movie.Genre}</h2>
-        {movie.Poster && movie.Poster !== "N/A" && (
-          <img src={movie.Poster} alt={movie.Title} />
+        {movie.Poster && movie.Poster !== "N/A" && ( 
+          <img src={movie.Poster} alt={movie.Title} /> 
         )}
         <h2>{movie.Year}</h2>
       </div>
