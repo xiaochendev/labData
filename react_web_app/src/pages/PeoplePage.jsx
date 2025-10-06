@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 
 export default function PeoplePage() {
-  const [person, setPerson] = useState(null); // Holds selected person data
+  const [person, setPerson] = useState(undefined); //no search has happened yet  
   const [films, setFilms] = useState([]); // Holds film objects
   const [loading, setLoading] = useState(false);
 
@@ -19,8 +19,8 @@ export default function PeoplePage() {
       
       // if movie not found
       if (res.data.results.length === 0) {
-        console.warn("Movie not found:", res.data.Error);
-        setPerson(null);
+        console.warn("Movie not found");
+        setPerson(null);        // search not found
         setFilms([]);
         return;
       }
@@ -53,41 +53,50 @@ export default function PeoplePage() {
   return (
     <div className="page">
       <h1>Search Star Wars Character</h1>
-      <Form moviesearch={searchPerson} />
+        <Form moviesearch={searchPerson} />
 
-      {loading && <h2>Loading...</h2>}
-      {!loading && person && (
-        <div>
-          <Person
-            name={person.name}
-            height={person.height}
-            birth_year={person.birth_year}
-          />
-            <h3>Films:</h3>
-            <div className="movies-container">
-                  {films.map((film, i) => (
-                    <div key={i} >
-                        <h4
-                          style={{ cursor: "pointer", color: "blue", textDecoration: "underline" }}
-                          onClick={() => handleMovieClick(film.title)}
-                        >
-                         {film.title}
-                         </h4>
-                        <MovieDisplay
-                          movie={{
-                            Title: film.title,
-                            Year: film.release_date,
-                            Plot: film.opening_crawl,
-                            Poster: "", // No poster in SWAPI
-                          }}
-                        />
-                    </div>
-                  ))}
+        {loading && <h2>Loading...</h2>}
+        {/* Character found */}
+        {!loading && person && (
+            <div>
+            <Person
+                name={person.name}
+                height={person.height}
+                birth_year={person.birth_year}
+            />
+                <h3>Films:</h3>
+                <div className="movies-container">
+                    {films.map((film, i) => (
+                        <div key={i} >
+                            <h4
+                            style={{ cursor: "pointer", color: "blue", textDecoration: "underline" }}
+                            onClick={() => handleMovieClick(film.title)}
+                            >
+                            {film.title}
+                            </h4>
+                            <MovieDisplay
+                            movie={{
+                                Title: film.title,
+                                Year: film.release_date,
+                                Plot: film.opening_crawl,
+                                Poster: "", // No poster in SWAPI
+                            }}
+                            />
+                        </div>
+                    ))}
+                </div>
             </div>
-        </div>
-      )}
+        )}
 
-      {!loading && !person && <p>Try searching for a character (e.g. "Luke")</p>}
+        {/* Character not found */}
+        {!loading && person === null && (
+            <p style={{ color: "red" }}>Character not found. Try a different name.</p>
+        )}
+
+        {/* No search yet */}
+        {!loading && typeof person === "undefined" && (
+            <p>Try searching for a character (e.g. "Luke")</p>
+        )}
     </div>
   );
 }
