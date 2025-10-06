@@ -18,22 +18,30 @@ export default function HomePage() {
     "Best",
   ];
 
-  // try to change the useEffect we created so that it grabs a random movie on each page refresh, rather than always starting with "Clueless."
+  // getPopularMovies
   useEffect(() => {
     const fetchPopularMovies = async () => {
-      const movieData = await Promise.all(
-        popularTitles.map(async (title) => {
-          const response = await fetch(
-            `https://www.omdbapi.com/?apikey=${API_KEY}&t=${title}`
+      setLoading(true);
+      try {
+        const movieData = await Promise.all(
+            popularTitles.map(async (title) => {
+              const response = await fetch(
+                `https://www.omdbapi.com/?apikey=${API_KEY}&t=${title}`
+              );
+              return await response.json();
+            })
           );
-          return await response.json();
-        })
-      );
-      setMovies(movieData);
-    };
-
-    fetchPopularMovies();
-  }, []);
+          setMovies(movieData);
+        } catch (error) {   
+          console.error('Error fetching movies:', error.message);
+          setMovies([]);     
+        } finally {
+        setLoading(false);
+        }
+      };
+      
+      fetchPopularMovies();
+    }, []);
 
   const handleClick = (title) => {
     navigate(`/movie?q=${encodeURIComponent(title)}`);
@@ -41,9 +49,12 @@ export default function HomePage() {
 
   return (
     <div>
-      <h1>Popular Movies</h1>
+      <h1>Popular Movies in OMDB</h1>
+
       {loading && <h2>Loading...</h2>}
-      {!loading && movies && (
+
+      {/* Movies found */}
+      {!loading && movies.length > 0 && (
         <div className='movies-container'>
           {movies && movies.map((movie, index) => (
             <div key={index} onClick={() => handleClick(movie.Title)} style={{ cursor: 'pointer' }}>
@@ -52,7 +63,12 @@ export default function HomePage() {
           ))}
         </div>
       )}
-      {!loading && !movies && <p>Coming soon...</p>}
+
+      {/* Movies not found */}
+      {!loading && movies.length === 0 && (
+        <p style={{ color: "red" }}>Coming soon...</p>
+      )}
+
     </div>
   );
 }
