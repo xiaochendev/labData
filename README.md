@@ -26,7 +26,9 @@
 - consume_3rd_api -- __lab 320.8__
 - build_todo_list -- __lab 320.9__ ***
 - react_web_app -- __SBA 320__ **********
+- capstone -- __CP 325.9__ ********************
 - trivia_game -- __group project__
+
 
 
 #### script.js - used optmized dynamic ways to solve problems, ex. function, parameter, dict
