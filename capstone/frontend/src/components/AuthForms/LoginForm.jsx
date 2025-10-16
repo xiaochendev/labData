@@ -22,8 +22,8 @@ export default function LoginForm({ setNewUser }) {
 
       nav("/game");
     } catch (err) {
-      console.error("Login failed:", err.response?.data?.error || err.message);
-      alert(err.response?.data?.error || "Login failed");
+      console.error("Login failed:", err.response?.data || err.message);
+      alert(err.response?.data || "Login failed");
     }
   }
   const handleClick = () => {
