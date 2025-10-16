@@ -1,10 +1,10 @@
 import style from "./Forms.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "../../context/authContext/authContext";
 import { useNavigate } from "react-router-dom";
 
 export default function RegisterForm({ setNewUser }) {
-  const { signUp } = useAuth();
+  const { signUp, user } = useAuth();
   const nav = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
@@ -12,6 +12,15 @@ export default function RegisterForm({ setNewUser }) {
     password: "",
     password2: "",
   });
+
+  const [isUpgrading, setIsUpgrading] = useState(false);
+
+  // Detect if user is a guest
+  useEffect(() => {
+    if (user && user.username?.startsWith("guest_") && user?.isGuest) {
+      setIsUpgrading(true);
+    }
+  }, [user]);
 
   function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -23,7 +32,12 @@ export default function RegisterForm({ setNewUser }) {
       if (formData.password !== formData.password2)
         throw new Error("Password Dont Match");
 
-      await signUp(formData);
+      await signUp(
+        { username: formData.username,
+          email: formData.email,
+          password: formData.password,
+          password2: formData.password2
+        });
 
       nav("/game"); // Go straight to protected route
     } catch (err) {
@@ -37,7 +51,12 @@ export default function RegisterForm({ setNewUser }) {
 
   return (
     <div className={style.forms}>
-      <h2>Register</h2>
+      <h2>{isUpgrading ? 'Upgrade Your Account' : 'Register'}</h2>
+      {isUpgrading && (
+        <p style={{ textAlign: "center", marginBottom: "1rem" }}>
+          You're currently playing as a guest. Upgrade to save progress & history permanently.
+        </p>
+      )}
       <form onSubmit={handleSubmit}>
         <label>
           Name:
@@ -80,9 +99,13 @@ export default function RegisterForm({ setNewUser }) {
         />
         <input type="submit" value="Sign Up" />
       </form>
-      <p>
-        Already have an account? <button onClick={handleClick}>Sign In</button>
-      </p>
+      {!isUpgrading && (
+        <p>
+          Already have an account? {" "}
+          <button onClick={handleClick}>Sign In</button>
+        </p>
+      )}
+      
     </div>
   );
 }
