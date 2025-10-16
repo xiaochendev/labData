@@ -36,7 +36,7 @@ userSchema.pre('save', async function (next) {
   if (!this.isModified('passwordHash')) return next();
 
   if (!this.isGuest && this.passwordHash) {
-    console.log("🔐 Hashing password in pre-save hook");
+    // console.log("🔐 Hashing password in pre-save hook");
 
     const salt = await bcrypt.genSalt(10);
     this.passwordHash = await bcrypt.hash(this.passwordHash, salt);
