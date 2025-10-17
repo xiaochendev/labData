@@ -38,16 +38,23 @@ export const register = async (req, res) => {
     const { _id, createdAt, isGuest } = newUser;
     const token = generateToken(_id, isGuest);
 
-    res.json({ 
-      token, 
-      user: { 
-        id: _id, 
-        username, 
-        email, 
-        createdAt, 
-        isGuest 
-      }, 
-    });
+    // res.json({ token, user: { id: _id, username, email, createdAt, isGuest }, });
+    res
+      .cookie('token', token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',     // Only secure in prod
+        sameSite: 'lax',   
+        maxAge: 604800000,  
+      })
+      .json({
+      user: {
+        id: _id,
+        username,
+        email,
+        createdAt,
+        isGuest
+      }
+    })
 
   } catch (err) {
     console.error("❌ Register error:", err);  
@@ -84,8 +91,15 @@ export const login = async (req, res) => {
     const token = generateToken(_id, isGuest);
 
     // res.json({ token, user: { id: user._id, username: user.username } });
-    res.json({
-      token,
+    res
+      .cookie('token', token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        // sameSite: 'strict',
+        sameSite: 'lax',   // better dev compatibility
+        maxAge: 604800000,  // 7 days
+      })
+      .json({
       user: {
         id: _id,
         username,
@@ -123,8 +137,24 @@ export const generateGuestToken = async (req, res) => {
 
     await guestUser.save();
 
-    const token = generateToken(guestUser._id, '1d');
-    res.json({ token, user: { id: guestUser._id, username: guestUser.username } });
+    const token = generateToken(guestUser._id, true, '1d');
+    // res.json({ token, user: { id: guestUser._id, username: guestUser.username } });
+    res
+      .cookie('token', token, {
+        httpOnly: true,   // prevent XSS, when false it makes token accessible from JS(less secure)
+        // secure: false,
+        secure: process.env.NODE_ENV === 'production',  // ensures cookies are only sent over HTTPS in production
+        // sameSite: 'strict',
+        sameSite: 'lax',
+        // maxAge: 86400000
+        expires: new Date(Date.now() + 86400000),
+      })
+      .json({
+        user: {
+          id: guestUser._id,
+          username: guestUser.username
+        }
+      })
 
   } catch (err) {
     console.error("❌ generateGuestToken error:", err);  
@@ -158,7 +188,22 @@ export const upgradeGuest = async (req, res) => {
     await guestUser.save();
 
     const newToken = generateToken(guestUser._id, false);
-    res.json({ token: newToken, user: { id: guestUser._id, username: guestUser.username } });
+    // res.json({ token: newToken, user: { id: guestUser._id, username: guestUser.username } });
+    res
+      .cookie('token', newToken, {
+        httpOnly: true,
+        // secure: false,
+        secure: process.env.NODE_ENV === 'production',
+        // sameSite: 'strict',
+        sameSite: 'lax',
+        maxAge: 86400000
+      })
+      .json({
+        user: {
+          id: guestUser._id,
+          username: guestUser.username
+        }
+      })
   } catch (err) {
     console.error("❌ upgradeGuest error:", err);
     res.status(500).json({ error: "Failed to upgrade account" });
@@ -185,3 +230,7 @@ export const getGuestInfo = async (req, res) => {
     res.status(500).json({ error: "Failed to retrieve guest info" });
   }
 };
+
+export const logout = async (req, res) => {
+  res.clearCookie('token').json({ message: 'Logged out successfully' });
+}
