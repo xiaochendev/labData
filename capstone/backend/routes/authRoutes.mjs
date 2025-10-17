@@ -5,7 +5,9 @@ import {
     getUser, 
     generateGuestToken, 
     upgradeGuest, 
-    getGuestInfo } from '../controllers/authController.mjs';
+    getGuestInfo,
+    logout,
+        } from '../controllers/authController.mjs';
 import { authMiddleware } from '../middlewares/authMiddlewares.mjs';
 import { guestMiddleware } from '../middlewares/guestMiddleware.mjs';
 import { check, body } from 'express-validator';
@@ -38,6 +40,7 @@ router.post('/login',
         check("password", "Please Include a password").not().isEmpty(),
     ],login);
 
+router.post('/logout', logout);
 
 // Guest users only, allow guest to play game
 router.post('/guest', generateGuestToken);
@@ -47,7 +50,7 @@ router.get('/guest/info', authMiddleware, getGuestInfo);
 router.get('/', authMiddleware, getUser);
 
 
-// Guest users only, allow guest to register
+// Guest only, allow guest to upgrade
 router.post('/upgrade', guestMiddleware, upgradeGuest)
 
 
