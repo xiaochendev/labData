@@ -1,18 +1,15 @@
 import { useNavigate } from "react-router-dom";
-import api from "../../utilities/apiService.mjs"; 
-import { Cookies } from "react-cookie";
 import style from './Forms.module.css';
-
-const cookies = new Cookies();
+import { useAuth } from '../../context/authContext/authContext.jsx';
 
 export default function GuestForm() {
   const nav = useNavigate();
+  const { startAsGuest } = useAuth();
 
   async function handleGuestStart(e) {
     e.preventDefault();
     try {
-      const res = await api.startAsGuest(); // POST /auth/guest
-      cookies.set("token", res.token, { path: "/" });
+      await startAsGuest();
       nav("/game"); // Go to protected route
     } catch (err) {
       console.error("Guest login failed:", err);
@@ -21,9 +18,11 @@ export default function GuestForm() {
 
   return (
     <div className={style.forms}>
-      <form onSubmit={handleGuestStart}>
+      {/* <form onSubmit={handleGuestStart}>
         <button type="submit">Continue as Guest</button>
-      </form>
+      </form> */}
+      <button onClick={handleGuestStart}>Continue as Guest</button>
+
     </div>
   );
 }
